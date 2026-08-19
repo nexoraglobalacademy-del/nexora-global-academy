@@ -1,0 +1,167 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f7fa;
+    color:#333;
+    line-height:1.6;
+}
+
+header{
+    background:#0d1b2a;
+    color:white;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+nav{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:20px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+}
+
+.hero{
+    height:90vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    padding:20px;
+    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f');
+    background-size:cover;
+    background-position:center;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.hero p{
+    max-width:700px;
+    margin-bottom:25px;
+}
+
+.btn{
+    background:#00a86b;
+    color:white;
+    padding:12px 25px;
+    border-radius:5px;
+    text-decoration:none;
+}
+
+section{
+    max-width:1200px;
+    margin:auto;
+    padding:80px 20px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.stats div{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.course-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.card i{
+    font-size:40px;
+    color:#00a86b;
+    margin-bottom:15px;
+}
+
+form{
+    max-width:500px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+input{
+    padding:12px;
+    border:1px solid #ccc;
+}
+
+button{
+    padding:12px;
+    background:#00a86b;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+footer{
+    background:#0d1b2a;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+@media(max-width:768px){
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:2rem;
+    }
+}
