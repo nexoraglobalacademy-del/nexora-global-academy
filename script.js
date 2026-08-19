@@ -1,115 +1,27 @@
-/* =========================================================
+//* =========================================================
    NEXORA GLOBAL ACADEMY
-   Main JavaScript - Step 1
+   Main JavaScript
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-
     /* ================= ELEMENTS ================= */
 
     const header = document.getElementById("site-header");
-
-    const mobileMenuBtn =
-        document.getElementById("mobile-menu-btn");
-
-    const navWrapper =
-        document.getElementById("nav-wrapper");
-
-    const navLinks =
-        document.querySelectorAll(".nav-link");
-
-    const themeToggle =
-        document.getElementById("theme-toggle");
-
-    const backToTop =
-        document.getElementById("back-to-top");
-
-    const membershipForm =
-        document.getElementById("membershipForm");
-
-    const message =
-        document.getElementById("message");
-
-    const currentYear =
-        document.getElementById("current-year");
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const navWrapper = document.getElementById("nav-wrapper");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const themeToggle = document.getElementById("theme-toggle");
+    const membershipForm = document.getElementById("membershipForm");
+    const message = document.getElementById("message");
+    const backToTop = document.getElementById("back-to-top");
+    const currentYear = document.getElementById("current-year");
 
 
     /* ================= CURRENT YEAR ================= */
 
     if (currentYear) {
-
-        currentYear.textContent =
-            new Date().getFullYear();
-
-    }
-
-
-    /* ================= MOBILE MENU ================= */
-
-    if (mobileMenuBtn && navWrapper) {
-
-        mobileMenuBtn.addEventListener("click", () => {
-
-            const isOpen =
-                navWrapper.classList.toggle("open");
-
-            mobileMenuBtn.setAttribute(
-                "aria-expanded",
-                isOpen
-            );
-
-            const icon =
-                mobileMenuBtn.querySelector("i");
-
-            if (icon) {
-
-                icon.classList.toggle(
-                    "fa-bars",
-                    !isOpen
-                );
-
-                icon.classList.toggle(
-                    "fa-xmark",
-                    isOpen
-                );
-
-            }
-
-        });
-
-
-        /*
-         * Close mobile navigation after
-         * clicking a navigation link.
-         */
-
-        navLinks.forEach(link => {
-
-            link.addEventListener("click", () => {
-
-                navWrapper.classList.remove("open");
-
-                mobileMenuBtn.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-                const icon =
-                    mobileMenuBtn.querySelector("i");
-
-                if (icon) {
-
-                    icon.classList.add("fa-bars");
-
-                    icon.classList.remove("fa-xmark");
-
-                }
-
-            });
-
-        });
-
+        currentYear.textContent = new Date().getFullYear();
     }
 
 
@@ -119,46 +31,313 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!header) return;
 
-        if (window.scrollY > 40) {
-
+        if (window.scrollY > 30) {
             header.classList.add("scrolled");
-
         } else {
-
             header.classList.remove("scrolled");
-
         }
-
-
-        /*
-         * Back to top button
-         */
 
         if (backToTop) {
 
             if (window.scrollY > 500) {
-
                 backToTop.classList.add("show");
-
             } else {
-
                 backToTop.classList.remove("show");
-
             }
 
         }
 
+        updateActiveNavigation();
     };
 
-
-    window.addEventListener(
-        "scroll",
-        handleScroll,
-        { passive: true }
-    );
-
+    window.addEventListener("scroll", handleScroll, {
+        passive: true
+    });
 
     handleScroll();
+
+
+    /* ================= MOBILE MENU ================= */
+
+    if (mobileMenuBtn && navWrapper) {
+
+        mobileMenuBtn.addEventListener("click", () => {
+
+            const isOpen = navWrapper.classList.toggle("open");
+
+            mobileMenuBtn.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
+            const icon = mobileMenuBtn.querySelector("i");
+
+            if (icon) {
+
+                if (isOpen) {
+                    icon.classList.remove("fa-bars");
+                    icon.classList.add("fa-xmark");
+                } else {
+                    icon.classList.remove("fa-xmark");
+                    icon.classList.add("fa-bars");
+                }
+
+            }
+
+        });
+
+    }
+
+
+    /* ================= CLOSE MOBILE MENU ================= */
+
+    navLinks.forEach((link) => {
+
+        link.addEventListener("click", () => {
+
+            if (!navWrapper || !mobileMenuBtn) return;
+
+            navWrapper.classList.remove("open");
+
+            mobileMenuBtn.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            const icon = mobileMenuBtn.querySelector("i");
+
+            if (icon) {
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+            }
+
+        });
+
+    });
+
+
+    /* ================= ACTIVE NAVIGATION ================= */
+
+    function updateActiveNavigation() {
+
+        const sections = document.querySelectorAll(
+            "main section[id]"
+        );
+
+        const scrollPosition =
+            window.scrollY +
+            (window.innerHeight * 0.3);
+
+        let currentSection = "home";
+
+        sections.forEach((section) => {
+
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+
+            if (
+                scrollPosition >= sectionTop &&
+                scrollPosition < sectionTop + sectionHeight
+            ) {
+                currentSection = section.id;
+            }
+
+        });
+
+        navLinks.forEach((link) => {
+
+            const target = link.getAttribute("href");
+
+            if (target === `#${currentSection}`) {
+                link.classList.add("active");
+            } else {
+                link.classList.remove("active");
+            }
+
+        });
+
+    }
+
+
+    /* ================= DARK MODE ================= */
+
+    const savedTheme =
+        localStorage.getItem("nexora-theme");
+
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+
+    updateThemeIcon();
+
+
+    if (themeToggle) {
+
+        themeToggle.addEventListener("click", () => {
+
+            document.body.classList.toggle("dark-mode");
+
+            const isDark =
+                document.body.classList.contains("dark-mode");
+
+            localStorage.setItem(
+                "nexora-theme",
+                isDark ? "dark" : "light"
+            );
+
+            updateThemeIcon();
+
+        });
+
+    }
+
+
+    function updateThemeIcon() {
+
+        if (!themeToggle) return;
+
+        const icon =
+            themeToggle.querySelector("i");
+
+        if (!icon) return;
+
+        const isDark =
+            document.body.classList.contains("dark-mode");
+
+        if (isDark) {
+
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-sun");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                "Switch to light mode"
+            );
+
+            themeToggle.setAttribute(
+                "title",
+                "Switch to light mode"
+            );
+
+        } else {
+
+            icon.classList.remove("fa-sun");
+            icon.classList.add("fa-moon");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                "Switch to dark mode"
+            );
+
+            themeToggle.setAttribute(
+                "title",
+                "Switch to dark mode"
+            );
+
+        }
+
+    }
+
+
+    /* ================= MEMBERSHIP FORM ================= */
+
+    if (membershipForm) {
+
+        membershipForm.addEventListener(
+            "submit",
+            (event) => {
+
+                event.preventDefault();
+
+                const fullName =
+                    document.getElementById("fullName");
+
+                const email =
+                    document.getElementById("email");
+
+                const country =
+                    document.getElementById("country");
+
+                const interest =
+                    document.getElementById("interest");
+
+
+                if (
+                    !fullName ||
+                    !email ||
+                    !country ||
+                    !interest ||
+                    !message
+                ) {
+                    return;
+                }
+
+
+                const name =
+                    fullName.value.trim();
+
+                const emailValue =
+                    email.value.trim();
+
+                const countryValue =
+                    country.value.trim();
+
+                const interestValue =
+                    interest.value;
+
+
+                if (
+                    !name ||
+                    !emailValue ||
+                    !countryValue ||
+                    !interestValue
+                ) {
+
+                    message.textContent =
+                        "Please complete all required fields.";
+
+                    message.className =
+                        "form-message error";
+
+                    return;
+                }
+
+
+                const emailPattern =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+                if (!emailPattern.test(emailValue)) {
+
+                    message.textContent =
+                        "Please enter a valid email address.";
+
+                    message.className =
+                        "form-message error";
+
+                    return;
+                }
+
+
+                /*
+                 * The website currently does not have a backend.
+                 * Therefore, this confirms the submission locally
+                 * instead of pretending that data was sent to a server.
+                 */
+
+                message.textContent =
+                    `Thank you, ${name}! Your interest in Nexora Global Academy has been recorded on this device.`;
+
+                message.className =
+                    "form-message success";
+
+
+                membershipForm.reset();
+
+            }
+        );
+
+    }
 
 
     /* ================= BACK TO TOP ================= */
@@ -177,325 +356,60 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ================= ACTIVE NAVIGATION ================= */
+    /* ================= SMOOTH ANCHOR LINKS ================= */
 
-    const sections =
-        document.querySelectorAll("main section[id]");
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach((link) => {
 
+            link.addEventListener("click", (event) => {
 
-    const updateActiveNav = () => {
+                const targetId =
+                    link.getAttribute("href");
 
-        const scrollPosition =
-            window.scrollY + 140;
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+                    return;
+                }
 
-        let currentSection = "home";
+                const target =
+                    document.querySelector(targetId);
 
-
-        sections.forEach(section => {
-
-            const sectionTop =
-                section.offsetTop;
-
-            const sectionHeight =
-                section.offsetHeight;
-
-            if (
-                scrollPosition >= sectionTop &&
-                scrollPosition < sectionTop + sectionHeight
-            ) {
-
-                currentSection =
-                    section.getAttribute("id");
-
-            }
-
-        });
-
-
-        navLinks.forEach(link => {
-
-            link.classList.remove("active");
-
-            const href =
-                link.getAttribute("href");
-
-            if (href === `#${currentSection}`) {
-
-                link.classList.add("active");
-
-            }
-
-        });
-
-    };
-
-
-    window.addEventListener(
-        "scroll",
-        updateActiveNav,
-        { passive: true }
-    );
-
-
-    updateActiveNav();
-
-
-    /* ================= DARK MODE ================= */
-
-    const savedTheme =
-        localStorage.getItem("nexora-theme");
-
-
-    if (savedTheme === "dark") {
-
-        document.body.classList.add("dark-mode");
-
-    }
-
-
-    const updateThemeIcon = () => {
-
-        if (!themeToggle) return;
-
-        const icon =
-            themeToggle.querySelector("i");
-
-        if (!icon) return;
-
-
-        const darkMode =
-            document.body.classList.contains("dark-mode");
-
-
-        icon.classList.toggle(
-            "fa-moon",
-            !darkMode
-        );
-
-        icon.classList.toggle(
-            "fa-sun",
-            darkMode
-        );
-
-    };
-
-
-    if (themeToggle) {
-
-        themeToggle.addEventListener("click", () => {
-
-            document.body.classList.toggle("dark-mode");
-
-
-            const isDark =
-                document.body.classList.contains("dark-mode");
-
-
-            localStorage.setItem(
-                "nexora-theme",
-                isDark ? "dark" : "light"
-            );
-
-
-            updateThemeIcon();
-
-        });
-
-    }
-
-
-    updateThemeIcon();
-
-
-    /* ================= MEMBERSHIP FORM ================= */
-
-    if (membershipForm) {
-
-        membershipForm.addEventListener(
-            "submit",
-            event => {
+                if (!target) {
+                    return;
+                }
 
                 event.preventDefault();
 
+                const headerHeight =
+                    header
+                        ? header.offsetHeight
+                        : 0;
 
-                const fullName =
-                    document.getElementById("fullName");
+                const targetPosition =
+                    target.getBoundingClientRect().top +
+                    window.pageYOffset -
+                    headerHeight;
 
-                const email =
-                    document.getElementById("email");
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth"
+                });
 
-                const country =
-                    document.getElementById("country");
-
-                const interest =
-                    document.getElementById("interest");
-
-
-                /*
-                 * Basic validation
-                 */
-
-                if (
-                    !fullName ||
-                    !email ||
-                    !country ||
-                    !interest
-                ) {
-
-                    return;
-
-                }
-
-
-                if (
-                    !fullName.value.trim() ||
-                    !email.value.trim() ||
-                    !country.value.trim() ||
-                    !interest.value
-                ) {
-
-                    showFormMessage(
-                        "Please complete all required fields.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /*
-                 * Basic email validation
-                 */
-
-                const emailPattern =
-                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-                if (!emailPattern.test(email.value.trim())) {
-
-                    showFormMessage(
-                        "Please enter a valid email address.",
-                        "error"
-                    );
-
-                    email.focus();
-
-                    return;
-
-                }
-
-
-                /*
-                 * Current Step 1 behaviour:
-                 *
-                 * This confirms the registration on the
-                 * browser. It does NOT store the data online.
-                 *
-                 * A real backend / Google Form / Formspree /
-                 * database will be connected in a later step.
-                 */
-
-                showFormMessage(
-                    `Thank you, ${fullName.value.trim()}! Your interest in Nexora Global Academy has been received.`,
-                    "success"
-                );
-
-
-                membershipForm.reset();
-
-
-                /*
-                 * Keep the success message visible
-                 * for several seconds.
-                 */
-
-                setTimeout(() => {
-
-                    if (message) {
-
-                        message.classList.remove(
-                            "success"
-                        );
-
-                        message.style.display =
-                            "none";
-
-                    }
-
-                }, 7000);
-
-            }
-        );
-
-    }
-
-
-    /* ================= FORM MESSAGE ================= */
-
-    function showFormMessage(text, type) {
-
-        if (!message) return;
-
-
-        message.textContent = text;
-
-        message.className =
-            `form-message ${type}`;
-
-        message.style.display =
-            "block";
-
-    }
-
-
-    /* ================= SMOOTH INTERNAL LINKS ================= */
-
-    document.querySelectorAll(
-        'a[href^="#"]'
-    ).forEach(link => {
-
-        link.addEventListener("click", event => {
-
-            const targetId =
-                link.getAttribute("href");
-
-            if (
-                !targetId ||
-                targetId === "#"
-            ) {
-
-                return;
-
-            }
-
-
-            const target =
-                document.querySelector(targetId);
-
-
-            if (!target) return;
-
-
-            event.preventDefault();
-
-
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
             });
 
         });
 
-    });
-
 
     /* ================= ESCAPE KEY ================= */
 
-    document.addEventListener("keydown", event => {
+    document.addEventListener("keydown", (event) => {
 
-        if (event.key !== "Escape") return;
-
+        if (event.key !== "Escape") {
+            return;
+        }
 
         if (
             navWrapper &&
@@ -504,9 +418,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             navWrapper.classList.remove("open");
 
-
             if (mobileMenuBtn) {
-
                 mobileMenuBtn.setAttribute(
                     "aria-expanded",
                     "false"
@@ -516,13 +428,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     mobileMenuBtn.querySelector("i");
 
                 if (icon) {
-
-                    icon.classList.add("fa-bars");
-
                     icon.classList.remove("fa-xmark");
-
+                    icon.classList.add("fa-bars");
                 }
-
             }
 
         }
