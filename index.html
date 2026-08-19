@@ -1,140 +1,1227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora Global Academy (NGA)</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Nexora Global Academy empowers future leaders through technology, finance, entrepreneurship, innovation and lifelong learning.">
+    <meta name="keywords" content="Nexora Global Academy, technology, coding, AI, investing, entrepreneurship, digital skills, leadership">
+    <meta name="author" content="Nexora Global Academy">
+
+    <title>Nexora Global Academy | Empowering Future Leaders</title>
+
+    <link rel="icon" type="image/png" href="nga-logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<header>
-    <nav>
-   <div class="logo">
-    <img src="nga-logo.png" alt="NGA Logo">
-    <span>NGA</span>
-</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#courses">Courses</a></li>
-            <li><a href="#membership">Membership</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button id="theme-toggle">
-            <i class="fas fa-moon"></i>
+
+<!-- ================= HEADER ================= -->
+
+<header class="site-header" id="site-header">
+
+    <nav class="navbar">
+
+        <a href="#home" class="brand">
+
+            <img
+                src="nga-logo.png"
+                alt="Nexora Global Academy Logo"
+                class="brand-logo"
+            >
+
+            <div class="brand-text">
+                <span class="brand-name">NEXORA</span>
+                <span class="brand-subtitle">GLOBAL ACADEMY</span>
+            </div>
+
+        </a>
+
+        <button
+            class="mobile-menu-btn"
+            id="mobile-menu-btn"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+        >
+            <i class="fas fa-bars"></i>
         </button>
+
+        <div class="nav-wrapper" id="nav-wrapper">
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="#home" class="nav-link active">Home</a>
+                </li>
+
+                <li>
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+
+                <li>
+                    <a href="#why-nexora" class="nav-link">Why Nexora</a>
+                </li>
+
+                <li>
+                    <a href="#courses" class="nav-link">Courses</a>
+                </li>
+
+                <li>
+                    <a href="#membership" class="nav-link">Membership</a>
+                </li>
+
+                <li>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+
+            </ul>
+
+            <a href="#membership" class="nav-cta">
+                Join NGA
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
+            <button
+                id="theme-toggle"
+                class="theme-toggle"
+                aria-label="Toggle dark mode"
+                title="Toggle dark mode"
+            >
+                <i class="fas fa-moon"></i>
+            </button>
+
+        </div>
+
     </nav>
+
 </header>
+
+
+<main>
+
+<!-- ================= HERO ================= -->
+
 <section id="home" class="hero">
-    <h1>NEXORA GLOBAL ACADEMY (NGA)</h1>
 
-    <p>
-        Empowering Future Leaders Through Technology, Finance,
-        Entrepreneurship, Innovation, and Lifelong Learning.
-    </p>
+    <div class="hero-overlay"></div>
 
-    <a href="#membership" class="btn">Join NGA Today</a>
-</section>
-<section id="about">
-    <h2>About NGA</h2>
-   <p>
-Nexora Global Academy (NGA) is a global learning platform dedicated to
-equipping individuals with practical skills in technology, coding,
-artificial intelligence, stock market investing, entrepreneurship,
-leadership, and digital innovation.
+    <div class="hero-content">
 
-Our mission is to prepare learners for success in the modern world by
-providing quality education, mentorship, and opportunities for growth.
-</p>
-    <div class="stats">
-        <div>
-            <h3>100+</h3>
-            <p>Future Courses</p>
+        <div class="hero-badge">
+            <i class="fas fa-globe"></i>
+            A Global Learning Community
         </div>
-        <div>
-            <h3>Global</h3>
-            <p>Learning Community</p>
+
+        <h1>
+            Empowering the
+            <span>Next Generation</span>
+            of Global Leaders
+        </h1>
+
+        <p>
+            Build practical skills in technology, artificial intelligence,
+            finance, entrepreneurship, digital innovation and leadership
+            for a rapidly changing world.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#courses" class="btn btn-primary">
+                Explore Courses
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
+            <a href="#membership" class="btn btn-outline">
+                Join Nexora
+                <i class="fas fa-user-plus"></i>
+            </a>
+
         </div>
-        <div>
-            <h3>24/7</h3>
-            <p>Digital Learning</p>
+
+        <div class="hero-trust">
+
+            <div class="trust-item">
+                <i class="fas fa-check-circle"></i>
+                Practical Learning
+            </div>
+
+            <div class="trust-item">
+                <i class="fas fa-check-circle"></i>
+                Future-Ready Skills
+            </div>
+
+            <div class="trust-item">
+                <i class="fas fa-check-circle"></i>
+                Global Community
+            </div>
+
         </div>
+
     </div>
+
+    <a href="#about" class="scroll-indicator">
+        <span>Discover Nexora</span>
+        <i class="fas fa-chevron-down"></i>
+    </a>
+
 </section>
-<section id="courses">
-    <h2>Our Courses</h2>
-    <div class="course-grid">
-        <div class="card">
-            <i class="fas fa-code"></i>
-            <h3>Coding</h3>
-            <p>Web Development, Python, AI and Software Engineering.</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-chart-line"></i>
-            <h3>Stocks & Investing</h3>
-            <p>Learn wealth creation and investment strategies.</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-briefcase"></i>
-            <h3>Entrepreneurship</h3>
-            <p>Build businesses and create opportunities.</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-laptop"></i>
-            <h3>Digital Skills</h3>
-            <p>Graphic Design, Marketing and Productivity.</p>
-        </div>
-        <div class="card">
-    <i class="fas fa-robot"></i>
-    <h3>Artificial Intelligence</h3>
-    <p>Learn AI tools, automation, and future technologies.</p>
-</div>
 
-<div class="card">
-    <i class="fas fa-bullhorn"></i>
-    <h3>Digital Marketing</h3>
-    <p>Master online marketing and brand growth.</p>
-</div>
 
-<div class="card">
-    <i class="fas fa-user-tie"></i>
-    <h3>Leadership</h3>
-    <p>Develop leadership and communication skills.</p>
-</div>
+<!-- ================= STATS ================= -->
+
+<section class="stats-section">
+
+    <div class="container stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fas fa-book-open"></i>
+            </div>
+
+            <div>
+                <h3>100+</h3>
+                <p>Future Courses</p>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fas fa-globe"></i>
+            </div>
+
+            <div>
+                <h3>Global</h3>
+                <p>Learning Community</p>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+
+            <div>
+                <h3>24/7</h3>
+                <p>Digital Learning</p>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+
+            <div>
+                <h3>Future</h3>
+                <p>Focused Education</p>
+            </div>
+
+        </div>
+
     </div>
+
 </section>
-<section id="membership">
-    <h2>Become a Member</h2>
-    <form id="membershipForm">
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <input type="text" placeholder="Country" required>
-        <button type="submit">Register</button>
-    </form>
-    <p id="message"></p>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about" class="section about-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="eyebrow">ABOUT NEXORA</span>
+
+            <h2>
+                Learning Today.
+                <span>Leading Tomorrow.</span>
+            </h2>
+
+            <p>
+                Nexora Global Academy is a forward-thinking learning platform
+                designed to equip individuals with the knowledge, skills and
+                mindset needed to succeed in the modern digital economy.
+            </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="about-content">
+
+                <p>
+                    We bring together technology, finance, entrepreneurship,
+                    innovation and leadership to create a practical learning
+                    environment for people who want to grow, build and make
+                    meaningful impact.
+                </p>
+
+                <p>
+                    Our goal is not simply to teach information. We help
+                    learners transform knowledge into practical skills,
+                    opportunities and real-world results.
+                </p>
+
+                <div class="about-points">
+
+                    <div class="about-point">
+                        <i class="fas fa-circle-check"></i>
+                        <span>Practical and relevant education</span>
+                    </div>
+
+                    <div class="about-point">
+                        <i class="fas fa-circle-check"></i>
+                        <span>Technology-focused learning</span>
+                    </div>
+
+                    <div class="about-point">
+                        <i class="fas fa-circle-check"></i>
+                        <span>Entrepreneurial mindset</span>
+                    </div>
+
+                    <div class="about-point">
+                        <i class="fas fa-circle-check"></i>
+                        <span>Leadership development</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="about-card-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+
+                <h3>Our Mission</h3>
+
+                <p>
+                    To provide accessible, practical and future-focused
+                    education that empowers individuals to become skilled,
+                    innovative and responsible global leaders.
+                </p>
+
+                <div class="mission-line"></div>
+
+                <span>
+                    Learn • Build • Lead • Impact
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
-<section id="contact">
-    <h2>Contact Us</h2>
 
-    <p>Email: nexoraglobalacademy@gmail.com</p>
 
-    <p>WhatsApp: +2348167193341</p>
+<!-- ================= WHY NEXORA ================= -->
 
-    <p>WhatsApp: +2349035070966</p>
+<section id="why-nexora" class="section why-section">
+
+    <div class="container">
+
+        <div class="section-heading centered">
+
+            <span class="eyebrow">WHY NEXORA</span>
+
+            <h2>
+                More Than Education.
+                <span>A Launchpad for Your Future.</span>
+            </h2>
+
+            <p>
+                Everything we do is designed to help learners develop skills
+                that can be applied beyond the classroom.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+
+                <h3>Practical Learning</h3>
+
+                <p>
+                    Learn skills through practical examples, projects and
+                    real-world applications.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+
+                <h3>Future-Ready Skills</h3>
+
+                <p>
+                    Develop knowledge in emerging technologies and industries
+                    shaping the future.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+
+                <h3>Personal Growth</h3>
+
+                <p>
+                    Build confidence, communication, leadership and
+                    problem-solving abilities.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+
+                <h3>Entrepreneurship</h3>
+
+                <p>
+                    Learn how to turn ideas into opportunities, businesses
+                    and sustainable value.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+
+                <h3>Global Community</h3>
+
+                <p>
+                    Connect with learners and future-focused individuals
+                    from different backgrounds.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fas fa-infinity"></i>
+                </div>
+
+                <h3>Lifelong Learning</h3>
+
+                <p>
+                    Keep learning, adapting and growing as technology and
+                    opportunities evolve.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
 </section>
-<footer>
-    <h3>Nexora Global Academy (NGA)</h3>
 
-    <p>Empowering Future Leaders Through Technology, Finance, Entrepreneurship, Innovation and Lifelong Learning.</p>
 
-    <p>Email: nexoraglobalacademy@gmail.com</p>
+<!-- ================= COURSES ================= -->
 
-    <p>WhatsApp: +2348167193341 | +2349035070966</p>
+<section id="courses" class="section courses-section">
 
-    <p>© 2026 Nexora Global Academy. All Rights Reserved.</p>
+    <div class="container">
+
+        <div class="section-heading centered">
+
+            <span class="eyebrow">LEARNING AREAS</span>
+
+            <h2>
+                Explore Your
+                <span>Future Skills</span>
+            </h2>
+
+            <p>
+                Discover learning areas designed to help you build valuable
+                skills for technology, business and personal growth.
+            </p>
+
+        </div>
+
+
+        <div class="course-grid">
+
+
+            <article class="course-card">
+
+                <div class="course-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+
+                <div class="course-content">
+
+                    <span class="course-label">TECHNOLOGY</span>
+
+                    <h3>Coding & Software Engineering</h3>
+
+                    <p>
+                        Learn web development, programming, software
+                        engineering and digital product creation.
+                    </p>
+
+                    <a href="#membership" class="course-link">
+                        Start Learning
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="course-card">
+
+                <div class="course-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+
+                <div class="course-content">
+
+                    <span class="course-label">EMERGING TECH</span>
+
+                    <h3>Artificial Intelligence</h3>
+
+                    <p>
+                        Understand AI tools, automation, productivity and
+                        emerging technologies shaping the future.
+                    </p>
+
+                    <a href="#membership" class="course-link">
+                        Start Learning
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="course-card">
+
+                <div class="course-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+
+                <div class="course-content">
+
+                    <span class="course-label">FINANCE</span>
+
+                    <h3>Stocks & Investing</h3>
+
+                    <p>
+                        Build your understanding of investing, financial
+                        markets, wealth creation and risk management.
+                    </p>
+
+                    <a href="#membership" class="course-link">
+                        Start Learning
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="course-card">
+
+                <div class="course-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+
+                <div class="course-content">
+
+                    <span class="course-label">BUSINESS</span>
+
+                    <h3>Entrepreneurship</h3>
+
+                    <p>
+                        Learn how to identify opportunities, develop ideas
+                        and build sustainable businesses.
+                    </p>
+
+                    <a href="#membership" class="course-link">
+                        Start Learning
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="course-card">
+
+                <div class="course-icon">
+                    <i class="fas fa-laptop"></i>
+                </div>
+
+                <div class="course-content">
+
+                    <span class="course-label">DIGITAL</span>
+
+                    <h3>Digital Skills</h3>
+
+                    <p>
+                        Develop essential skills in graphic design,
+                        productivity tools and digital work.
+                    </p>
+
+                    <a href="#membership" class="course-link">
+                        Start Learning
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="course-card">
+
+                <div class="course-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+
+                <div class="course-content">
+
+                    <span class="course-label">MARKETING</span>
+
+                    <h3>Digital Marketing</h3>
+
+                    <p>
+                        Learn online marketing, content strategy, audience
+                        growth and digital brand building.
+                    </p>
+
+                    <a href="#membership" class="course-link">
+                        Start Learning
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="course-card">
+
+                <div class="course-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+
+                <div class="course-content">
+
+                    <span class="course-label">LEADERSHIP</span>
+
+                    <h3>Leadership & Communication</h3>
+
+                    <p>
+                        Develop communication, decision-making, teamwork and
+                        leadership capabilities.
+                    </p>
+
+                    <a href="#membership" class="course-link">
+                        Start Learning
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="course-card coming-soon">
+
+                <div class="course-icon">
+                    <i class="fas fa-plus"></i>
+                </div>
+
+                <div class="course-content">
+
+                    <span class="course-label">COMING SOON</span>
+
+                    <h3>More Future Courses</h3>
+
+                    <p>
+                        New learning programs will continue to expand across
+                        technology, finance, business and innovation.
+                    </p>
+
+                    <a href="#membership" class="course-link">
+                        Join the Community
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LEARNING JOURNEY ================= -->
+
+<section class="section journey-section">
+
+    <div class="container">
+
+        <div class="section-heading centered">
+
+            <span class="eyebrow">THE NEXORA JOURNEY</span>
+
+            <h2>
+                Learn.
+                <span>Build. Lead. Impact.</span>
+            </h2>
+
+            <p>
+                Our learning philosophy is simple: knowledge should create
+                action and action should create meaningful results.
+            </p>
+
+        </div>
+
+
+        <div class="journey-grid">
+
+            <div class="journey-step">
+
+                <div class="journey-number">01</div>
+
+                <div class="journey-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+
+                <h3>Learn</h3>
+
+                <p>
+                    Gain relevant knowledge and understand the fundamentals.
+                </p>
+
+            </div>
+
+
+            <div class="journey-connector"></div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-number">02</div>
+
+                <div class="journey-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+
+                <h3>Practice</h3>
+
+                <p>
+                    Apply what you learn through exercises and practical work.
+                </p>
+
+            </div>
+
+
+            <div class="journey-connector"></div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-number">03</div>
+
+                <div class="journey-icon">
+                    <i class="fas fa-hammer"></i>
+                </div>
+
+                <h3>Build</h3>
+
+                <p>
+                    Turn your knowledge into projects, ideas and opportunities.
+                </p>
+
+            </div>
+
+
+            <div class="journey-connector"></div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-number">04</div>
+
+                <div class="journey-icon">
+                    <i class="fas fa-flag"></i>
+                </div>
+
+                <h3>Lead</h3>
+
+                <p>
+                    Use your skills to create value and make meaningful impact.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MEMBERSHIP ================= -->
+
+<section id="membership" class="section membership-section">
+
+    <div class="container">
+
+        <div class="membership-card">
+
+            <div class="membership-content">
+
+                <span class="eyebrow">JOIN NEXORA</span>
+
+                <h2>
+                    Your Future Starts
+                    <span>With One Decision.</span>
+                </h2>
+
+                <p>
+                    Join the Nexora Global Academy community and begin your
+                    journey toward practical skills, personal growth and
+                    future opportunities.
+                </p>
+
+                <div class="membership-benefits">
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Access to learning opportunities
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Future-focused community
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Personal and professional development
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="membership-form-container">
+
+                <h3>Join the Learning Community</h3>
+
+                <p class="form-intro">
+                    Complete the form below to register your interest.
+                </p>
+
+                <form id="membershipForm">
+
+                    <div class="input-group">
+
+                        <label for="fullName">Full Name</label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="email">Email Address</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="country">Country</label>
+
+                        <input
+                            type="text"
+                            id="country"
+                            name="country"
+                            placeholder="Enter your country"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="interest">Area of Interest</label>
+
+                        <select id="interest" name="interest" required>
+
+                            <option value="" selected disabled>
+                                Select an area
+                            </option>
+
+                            <option value="coding">
+                                Coding & Software Engineering
+                            </option>
+
+                            <option value="ai">
+                                Artificial Intelligence
+                            </option>
+
+                            <option value="investing">
+                                Stocks & Investing
+                            </option>
+
+                            <option value="entrepreneurship">
+                                Entrepreneurship
+                            </option>
+
+                            <option value="digital-skills">
+                                Digital Skills
+                            </option>
+
+                            <option value="marketing">
+                                Digital Marketing
+                            </option>
+
+                            <option value="leadership">
+                                Leadership
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button type="submit" class="form-submit">
+
+                        Register Interest
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </button>
+
+                    <p id="message" class="form-message"></p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact" class="section contact-section">
+
+    <div class="container">
+
+        <div class="section-heading centered">
+
+            <span class="eyebrow">GET IN TOUCH</span>
+
+            <h2>
+                Let's Build the
+                <span>Future Together.</span>
+            </h2>
+
+            <p>
+                Have a question about Nexora Global Academy, our learning
+                areas or membership? Reach out to us.
+            </p>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+            <a
+                href="mailto:nexoraglobalacademy@gmail.com"
+                class="contact-card"
+            >
+
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+
+                <div>
+                    <span>Email Us</span>
+                    <strong>nexoraglobalacademy@gmail.com</strong>
+                </div>
+
+            </a>
+
+
+            <a
+                href="https://wa.me/2348167193341"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-card"
+            >
+
+                <div class="contact-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+
+                <div>
+                    <span>WhatsApp</span>
+                    <strong>+234 816 719 3341</strong>
+                </div>
+
+            </a>
+
+
+            <a
+                href="https://wa.me/2349035070966"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-card"
+            >
+
+                <div class="contact-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+
+                <div>
+                    <span>WhatsApp</span>
+                    <strong>+234 903 507 0966</strong>
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="site-footer">
+
+    <div class="container footer-grid">
+
+        <div class="footer-brand">
+
+            <a href="#home" class="brand footer-logo">
+
+                <img
+                    src="nga-logo.png"
+                    alt="Nexora Global Academy Logo"
+                >
+
+                <div class="brand-text">
+                    <span class="brand-name">NEXORA</span>
+                    <span class="brand-subtitle">GLOBAL ACADEMY</span>
+                </div>
+
+            </a>
+
+            <p>
+                Empowering future leaders through technology, finance,
+                entrepreneurship, innovation and lifelong learning.
+            </p>
+
+            <div class="social-links">
+
+                <a
+                    href="mailto:nexoraglobalacademy@gmail.com"
+                    aria-label="Email"
+                >
+                    <i class="fas fa-envelope"></i>
+                </a>
+
+                <a
+                    href="https://wa.me/2348167193341"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                >
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+
+                <a
+                    href="https://wa.me/2349035070966"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                >
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Explore</h4>
+
+            <a href="#about">About NGA</a>
+            <a href="#why-nexora">Why Nexora</a>
+            <a href="#courses">Courses</a>
+            <a href="#membership">Membership</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Learning Areas</h4>
+
+            <a href="#courses">Technology</a>
+            <a href="#courses">Artificial Intelligence</a>
+            <a href="#courses">Finance & Investing</a>
+            <a href="#courses">Entrepreneurship</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Contact</h4>
+
+            <a href="mailto:nexoraglobalacademy@gmail.com">
+                Email
+            </a>
+
+            <a
+                href="https://wa.me/2348167193341"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                WhatsApp
+            </a>
+
+            <a
+                href="https://wa.me/2349035070966"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                WhatsApp 2
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            <p>
+                © <span id="current-year">2026</span>
+                Nexora Global Academy. All Rights Reserved.
+            </p>
+
+            <p>
+                Learn • Build • Lead • Impact
+            </p>
+
+        </div>
+
+    </div>
+
 </footer>
+
+
+<!-- Back to top -->
+
+<button
+    id="back-to-top"
+    class="back-to-top"
+    aria-label="Back to top"
+>
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+
 <script src="script.js"></script>
+
 </body>
 </html>
-
