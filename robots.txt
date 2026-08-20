@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nexoraglobalacademy-del.github.io/nexora-global-academy/sitemap.xml
