@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-
-  <!-- =====================================================
-       NEXORA GLOBAL ACADEMY
-       INDEX.HTML — VERSION 2.0
-       ===================================================== -->
-
   <meta charset="UTF-8">
 
   <meta
@@ -16,17 +11,17 @@
 
   <meta
     name="description"
-    content="Nexora Global Academy — Empowering Minds, Transforming Futures through practical education, digital skills, financial intelligence, entrepreneurship, leadership and career development."
+    content="Nexora Global Academy is a global learning and development platform focused on practical education, financial intelligence, entrepreneurship, technology, artificial intelligence, leadership, personal development and career growth."
   >
 
   <meta
     name="keywords"
-    content="Nexora Global Academy, online academy, digital skills, financial literacy, entrepreneurship, leadership, career development, technology, artificial intelligence, Nigeria"
+    content="Nexora Global Academy, NGA, online academy, digital skills, financial literacy, entrepreneurship, artificial intelligence, leadership development, career development, personal development"
   >
 
   <meta
     name="author"
-    content="Abdullahi Haadi O. — Nexora Global Academy"
+    content="Abdullahi Haadi O."
   >
 
   <meta
@@ -34,15 +29,76 @@
     content="#0b5d4b"
   >
 
+  <!-- Open Graph -->
+  <meta
+    property="og:title"
+    content="Nexora Global Academy"
+  >
+
+  <meta
+    property="og:description"
+    content="Empowering Minds, Transforming Futures."
+  >
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:url"
+    content="https://nexoraglobalacademy-del.github.io/nexora-global-academy/"
+  >
+
+  <meta
+    property="og:image"
+    content="https://nexoraglobalacademy-del.github.io/nexora-global-academy/nga-logo.png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="Nexora Global Academy Logo"
+  >
+
+  <!-- Twitter / X -->
+  <meta
+    name="twitter:card"
+    content="summary"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Nexora Global Academy"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Empowering Minds, Transforming Futures."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://nexoraglobalacademy-del.github.io/nexora-global-academy/nga-logo.png"
+  >
+
   <title>
     Nexora Global Academy | Empowering Minds, Transforming Futures
   </title>
 
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="favicon.svg"
+  >
 
-  <!-- =====================================================
-       GOOGLE FONTS
-       ===================================================== -->
+  <!-- Apple Touch Icon -->
+  <link
+    rel="apple-touch-icon"
+    href="nga-logo.png"
+  >
 
+  <!-- Google Fonts -->
   <link
     rel="preconnect"
     href="https://fonts.googleapis.com"
@@ -59,31 +115,21 @@
     rel="stylesheet"
   >
 
-
-  <!-- =====================================================
-       FONT AWESOME
-       ===================================================== -->
-
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
-
-  <!-- =====================================================
-       WEBSITE CSS
-       ===================================================== -->
-
+  <!-- Main Stylesheet -->
   <link
     rel="stylesheet"
-    href="css/style.css"
+    href="style.css"
   >
-
 </head>
 
 
 <body>
-
 
   <!-- =====================================================
        ANNOUNCEMENT BAR
@@ -95,6 +141,7 @@
 
       <p>
         <i class="fa-solid fa-graduation-cap"></i>
+
         Welcome to Nexora Global Academy —
         Empowering Minds, Transforming Futures.
       </p>
@@ -102,7 +149,6 @@
     </div>
 
   </div>
-
 
 
   <!-- =====================================================
@@ -115,7 +161,6 @@
 
       <div class="navbar">
 
-
         <!-- LOGO -->
 
         <a
@@ -124,9 +169,10 @@
           aria-label="Nexora Global Academy Home"
         >
 
-          <div class="logo-mark">
-            N
-          </div>
+          <img
+            src="nga-logo.png"
+            alt="Nexora Global Academy Logo"
+          >
 
           <div class="logo-text">
 
@@ -209,6 +255,12 @@
             </li>
 
             <li>
+              <a href="#faq">
+                FAQ
+              </a>
+            </li>
+
+            <li>
               <a href="#contact">
                 Contact
               </a>
@@ -219,14 +271,17 @@
         </nav>
 
 
-        <!-- HEADER CTA -->
+        <!-- DESKTOP CTA -->
 
         <a
           href="#membership"
           class="btn-primary desktop-btn"
         >
+
           Join Nexora
+
           <i class="fa-solid fa-arrow-right"></i>
+
         </a>
 
       </div>
@@ -236,44 +291,44 @@
   </header>
 
 
-
   <!-- =====================================================
-       HERO SECTION
+       MAIN CONTENT
        ===================================================== -->
 
   <main>
 
 
+    <!-- ===================================================
+         HERO SECTION
+         =================================================== -->
+
     <section
       id="home"
-      class="hero-v2"
+      class="hero"
     >
 
-
-      <!-- Background Shapes -->
-
       <div
-        class="hero-background-shape shape-one"
+        class="hero-shape hero-shape-one"
         aria-hidden="true"
       ></div>
 
       <div
-        class="hero-background-shape shape-two"
+        class="hero-shape hero-shape-two"
         aria-hidden="true"
       ></div>
 
 
       <div class="container">
 
-        <div class="hero-v2-content">
+        <div class="hero-grid">
 
 
           <!-- HERO TEXT -->
 
-          <div class="hero-v2-text reveal">
+          <div class="hero-content reveal">
 
             <span class="eyebrow">
-              WELCOME TO NEXORA GLOBAL ACADEMY
+              NEXORA GLOBAL ACADEMY
             </span>
 
             <h1>
@@ -285,38 +340,44 @@
 
             </h1>
 
-            <p class="hero-lead">
+            <p>
 
-              Nexora Global Academy is a global learning
-              and development platform committed to
-              equipping individuals with practical
-              knowledge, valuable skills and the mindset
-              needed to thrive in a rapidly changing world.
+              A global learning and development
+              platform dedicated to empowering
+              individuals through education,
+              innovation, leadership, financial
+              intelligence, entrepreneurship and
+              digital skills.
 
             </p>
 
 
-            <div class="hero-v2-buttons">
+            <div class="hero-buttons">
 
               <a
                 href="#membership"
-                class="btn-light"
+                class="btn-primary"
               >
+
                 Become a Member
+
                 <i class="fa-solid fa-arrow-right"></i>
+
               </a>
 
               <a
                 href="#about"
-                class="btn-outline-light"
+                class="btn-secondary"
               >
+
                 Discover Nexora
+
               </a>
 
             </div>
 
 
-            <div class="hero-note">
+            <div class="hero-trust">
 
               <i class="fa-solid fa-circle-check"></i>
 
@@ -329,85 +390,77 @@
           </div>
 
 
-
           <!-- HERO VISUAL -->
 
-          <div class="hero-v2-visual reveal">
+          <div class="hero-visual reveal">
 
-            <div class="hero-orbit">
+            <div class="hero-card-main">
+
+              <img
+                src="nga-logo.png"
+                alt="Nexora Global Academy"
+              >
+
+              <h2>
+                NEXORA
+              </h2>
+
+              <p>
+                GLOBAL ACADEMY
+              </p>
+
+              <div class="hero-motto">
+
+                Empowering Minds,
+                Transforming Futures.
+
+              </div>
+
+            </div>
 
 
-              <div
-                class="orbit-circle orbit-one"
-              ></div>
+            <div class="floating-card floating-card-one">
 
-              <div
-                class="orbit-circle orbit-two"
-              ></div>
+              <div class="floating-icon">
 
+                <i class="fa-solid fa-laptop-code"></i>
 
-              <!-- CENTER -->
+              </div>
 
-              <div class="hero-center-card">
-
-                <div class="hero-icon">
-
-                  <i class="fa-solid fa-graduation-cap"></i>
-
-                </div>
+              <div>
 
                 <strong>
-                  NEXORA
+                  Digital Skills
                 </strong>
 
                 <span>
-                  GLOBAL ACADEMY
+                  Prepare for tomorrow
                 </span>
 
               </div>
 
-
-              <!-- FLOATING CARD -->
-
-              <div class="floating-card card-top">
-
-                <i class="fa-solid fa-laptop-code"></i>
-
-                <div>
-
-                  <strong>
-                    Digital Skills
-                  </strong>
-
-                  <small>
-                    Learn for the future
-                  </small>
-
-                </div>
-
-              </div>
+            </div>
 
 
-              <!-- FLOATING CARD -->
+            <div class="floating-card floating-card-two">
 
-              <div class="floating-card card-bottom">
+              <div class="floating-icon">
 
                 <i class="fa-solid fa-chart-line"></i>
 
-                <div>
-
-                  <strong>
-                    Financial Intelligence
-                  </strong>
-
-                  <small>
-                    Build better possibilities
-                  </small>
-
-                </div>
-
               </div>
 
+              <div>
+
+                <strong>
+                  Financial Intelligence
+                </strong>
+
+                <span>
+                  Build better possibilities
+                </span>
+
+              </div>
 
             </div>
 
@@ -420,22 +473,21 @@
     </section>
 
 
-
-    <!-- =====================================================
-         INTRODUCTION / ABOUT
-         ===================================================== -->
+    <!-- ===================================================
+         ABOUT SECTION
+         =================================================== -->
 
     <section
       id="about"
-      class="section introduction"
+      class="section about-section"
     >
 
       <div class="container">
 
-        <div class="introduction-grid">
+        <div class="about-grid">
 
 
-          <div class="reveal">
+          <div class="about-content reveal">
 
             <span class="section-label">
               ABOUT NEXORA
@@ -446,51 +498,54 @@
               the real world.
             </h2>
 
-            <p class="large-text">
+            <p class="lead">
 
               Nexora Global Academy (NGA) is a global
-              learning and development platform dedicated
-              to empowering individuals through education,
-              innovation, leadership, financial intelligence,
-              entrepreneurship and digital skills.
+              learning and development platform
+              dedicated to empowering individuals
+              through education, innovation, leadership,
+              financial intelligence, entrepreneurship
+              and digital skills.
 
             </p>
 
             <p>
 
-              We believe knowledge should be accessible
-              to everyone regardless of nationality,
-              religion, gender, background or economic
-              status.
+              The Academy is founded on the belief that
+              knowledge should be accessible to everyone
+              regardless of nationality, religion, gender,
+              background or economic status.
 
             </p>
 
             <p>
 
-              Through training, mentorship, research and
-              practical learning opportunities, Nexora
-              aims to equip people with the skills and
-              mindset needed to thrive in the modern world.
+              Through training, mentorship, research
+              and practical learning opportunities,
+              Nexora Global Academy aims to equip people
+              with the skills and mindset needed to thrive
+              in the modern world.
 
             </p>
 
           </div>
 
 
+          <div class="mission-card reveal">
 
-          <!-- MISSION -->
+            <div class="mission-icon">
 
-          <div class="mission-box reveal">
+              <i class="fa-solid fa-bullseye"></i>
+
+            </div>
 
             <span>
               OUR MISSION
             </span>
 
             <h3>
-
-              Practical education that
-              creates opportunities.
-
+              Education that creates
+              opportunities.
             </h3>
 
             <p>
@@ -513,10 +568,40 @@
     </section>
 
 
+    <!-- ===================================================
+         VISION SECTION
+         =================================================== -->
 
-    <!-- =====================================================
+    <section class="vision-section">
+
+      <div class="container">
+
+        <div class="vision-content reveal">
+
+          <span>
+            OUR VISION
+          </span>
+
+          <h2>
+
+            To become a world-leading academy that
+            empowers individuals with knowledge,
+            skills and opportunities to create
+            meaningful impact and achieve lifelong
+            success.
+
+          </h2>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
          PROGRAMMES / AREAS OF FOCUS
-         ===================================================== -->
+         =================================================== -->
 
     <section
       id="programmes"
@@ -539,14 +624,13 @@
 
           <p>
 
-            Our learning areas are designed to develop
-            practical abilities for personal, professional
-            and financial growth.
+            Our areas of focus are designed to develop
+            practical abilities for personal, professional,
+            financial and entrepreneurial growth.
 
           </p>
 
         </div>
-
 
 
         <div class="programme-grid">
@@ -562,7 +646,7 @@
 
             </div>
 
-            <span>
+            <span class="programme-number">
               01
             </span>
 
@@ -580,14 +664,13 @@
 
             <a href="#membership">
 
-              Explore Learning
+              Learn More
 
               <i class="fa-solid fa-arrow-right"></i>
 
             </a>
 
           </article>
-
 
 
           <!-- 02 -->
@@ -600,7 +683,7 @@
 
             </div>
 
-            <span>
+            <span class="programme-number">
               02
             </span>
 
@@ -611,21 +694,20 @@
             <p>
 
               Develop practical business knowledge,
-              startup thinking and enterprise
+              startup guidance and enterprise
               development skills.
 
             </p>
 
             <a href="#membership">
 
-              Explore Learning
+              Learn More
 
               <i class="fa-solid fa-arrow-right"></i>
 
             </a>
 
           </article>
-
 
 
           <!-- 03 -->
@@ -638,7 +720,7 @@
 
             </div>
 
-            <span>
+            <span class="programme-number">
               03
             </span>
 
@@ -648,22 +730,20 @@
 
             <p>
 
-              Build digital competencies and gain
-              knowledge of AI and emerging
-              technologies.
+              Build digital skills, AI knowledge
+              and emerging technology competencies.
 
             </p>
 
             <a href="#membership">
 
-              Explore Learning
+              Learn More
 
               <i class="fa-solid fa-arrow-right"></i>
 
             </a>
 
           </article>
-
 
 
           <!-- 04 -->
@@ -676,7 +756,7 @@
 
             </div>
 
-            <span>
+            <span class="programme-number">
               04
             </span>
 
@@ -686,22 +766,21 @@
 
             <p>
 
-              Develop leadership abilities through
-              mentorship, coaching and practical
+              Develop future leadership abilities
+              through mentorship, coaching and
               leadership education.
 
             </p>
 
             <a href="#membership">
 
-              Explore Learning
+              Learn More
 
               <i class="fa-solid fa-arrow-right"></i>
 
             </a>
 
           </article>
-
 
 
           <!-- 05 -->
@@ -714,7 +793,7 @@
 
             </div>
 
-            <span>
+            <span class="programme-number">
               05
             </span>
 
@@ -725,21 +804,20 @@
             <p>
 
               Build confidence, communication,
-              productivity and positive
-              self-development habits.
+              productivity and self-improvement
+              habits.
 
             </p>
 
             <a href="#membership">
 
-              Explore Learning
+              Learn More
 
               <i class="fa-solid fa-arrow-right"></i>
 
             </a>
 
           </article>
-
 
 
           <!-- 06 -->
@@ -752,7 +830,7 @@
 
             </div>
 
-            <span>
+            <span class="programme-number">
               06
             </span>
 
@@ -762,15 +840,15 @@
 
             <p>
 
-              Gain career-focused knowledge for
-              students, professionals and people
-              seeking new opportunities.
+              Support job seekers, professionals
+              and students through career-focused
+              learning.
 
             </p>
 
             <a href="#membership">
 
-              Explore Learning
+              Learn More
 
               <i class="fa-solid fa-arrow-right"></i>
 
@@ -786,10 +864,9 @@
     </section>
 
 
-
-    <!-- =====================================================
+    <!-- ===================================================
          WHY NEXORA
-         ===================================================== -->
+         =================================================== -->
 
     <section
       id="why-nexora"
@@ -814,8 +891,8 @@
 
             <p>
 
-              Nexora Global Academy is being built as
-              a community where people can learn,
+              Nexora Global Academy is being built
+              as a community where people can learn,
               develop, connect and prepare themselves
               for meaningful opportunities.
 
@@ -825,6 +902,7 @@
               href="#membership"
               class="btn-primary"
             >
+
               Join the Community
 
               <i class="fa-solid fa-arrow-right"></i>
@@ -834,16 +912,13 @@
           </div>
 
 
-
           <div class="benefits-list">
 
 
             <div class="benefit-item reveal">
 
               <div class="benefit-icon">
-
                 <i class="fa-solid fa-book-open"></i>
-
               </div>
 
               <div>
@@ -853,8 +928,8 @@
                 </h3>
 
                 <p>
-                  Focus on knowledge that can be
-                  applied to real-life situations.
+                  Knowledge designed for real-world
+                  application.
                 </p>
 
               </div>
@@ -862,13 +937,10 @@
             </div>
 
 
-
             <div class="benefit-item reveal">
 
               <div class="benefit-icon">
-
                 <i class="fa-solid fa-user-group"></i>
-
               </div>
 
               <div>
@@ -878,8 +950,8 @@
                 </h3>
 
                 <p>
-                  Opportunities to learn from
-                  experienced people and mentors.
+                  Opportunities for guidance,
+                  coaching and development.
                 </p>
 
               </div>
@@ -887,13 +959,10 @@
             </div>
 
 
-
             <div class="benefit-item reveal">
 
               <div class="benefit-icon">
-
                 <i class="fa-solid fa-network-wired"></i>
-
               </div>
 
               <div>
@@ -903,8 +972,8 @@
                 </h3>
 
                 <p>
-                  Connect with learners and
-                  innovators from different backgrounds.
+                  Connect with learners and innovators
+                  from different backgrounds.
                 </p>
 
               </div>
@@ -912,13 +981,10 @@
             </div>
 
 
-
             <div class="benefit-item reveal">
 
               <div class="benefit-icon">
-
                 <i class="fa-solid fa-lightbulb"></i>
-
               </div>
 
               <div>
@@ -928,7 +994,7 @@
                 </h3>
 
                 <p>
-                  Explore new ideas, technology and
+                  Explore ideas, technology and
                   solutions to modern challenges.
                 </p>
 
@@ -937,13 +1003,10 @@
             </div>
 
 
-
             <div class="benefit-item reveal">
 
               <div class="benefit-icon">
-
                 <i class="fa-solid fa-chart-line"></i>
-
               </div>
 
               <div>
@@ -962,13 +1025,10 @@
             </div>
 
 
-
             <div class="benefit-item reveal">
 
               <div class="benefit-icon">
-
                 <i class="fa-solid fa-globe"></i>
-
               </div>
 
               <div>
@@ -979,7 +1039,7 @@
 
                 <p>
                   Prepare for opportunities in
-                  an increasingly connected world.
+                  a connected world.
                 </p>
 
               </div>
@@ -996,14 +1056,11 @@
     </section>
 
 
+    <!-- ===================================================
+         LEARNING JOURNEY
+         =================================================== -->
 
-    <!-- =====================================================
-         HOW IT WORKS
-         ===================================================== -->
-
-    <section
-      class="section process-section"
-    >
+    <section class="section process-section">
 
       <div class="container">
 
@@ -1028,7 +1085,6 @@
         </div>
 
 
-
         <div class="process-grid">
 
 
@@ -1049,10 +1105,7 @@
           </div>
 
 
-          <div
-            class="process-line"
-            aria-hidden="true"
-          ></div>
+          <div class="process-line"></div>
 
 
           <div class="process-step reveal">
@@ -1072,10 +1125,7 @@
           </div>
 
 
-          <div
-            class="process-line"
-            aria-hidden="true"
-          ></div>
+          <div class="process-line"></div>
 
 
           <div class="process-step reveal">
@@ -1095,10 +1145,7 @@
           </div>
 
 
-          <div
-            class="process-line"
-            aria-hidden="true"
-          ></div>
+          <div class="process-line"></div>
 
 
           <div class="process-step reveal">
@@ -1125,38 +1172,9 @@
     </section>
 
 
-
-    <!-- =====================================================
-         VISION
-         ===================================================== -->
-
-    <section class="vision-banner">
-
-      <div class="container reveal">
-
-        <span>
-          OUR VISION
-        </span>
-
-        <h2>
-
-          To become a world-leading academy
-          that empowers individuals with
-          knowledge, skills and opportunities
-          to create meaningful impact and
-          achieve lifelong success.
-
-        </h2>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
+    <!-- ===================================================
          CORE VALUES
-         ===================================================== -->
+         =================================================== -->
 
     <section
       id="values"
@@ -1186,7 +1204,6 @@
         </div>
 
 
-
         <div class="values-grid">
 
 
@@ -1208,7 +1225,6 @@
           </article>
 
 
-
           <article class="value-card reveal">
 
             <i class="fa-solid fa-shield-halved"></i>
@@ -1225,7 +1241,6 @@
             </p>
 
           </article>
-
 
 
           <article class="value-card reveal">
@@ -1246,7 +1261,6 @@
           </article>
 
 
-
           <article class="value-card reveal">
 
             <i class="fa-solid fa-people-group"></i>
@@ -1263,7 +1277,6 @@
             </p>
 
           </article>
-
 
 
           <article class="value-card reveal">
@@ -1284,7 +1297,6 @@
           </article>
 
 
-
           <article class="value-card reveal">
 
             <i class="fa-solid fa-bullseye"></i>
@@ -1295,8 +1307,8 @@
 
             <p>
 
-              We focus on creating meaningful,
-              measurable positive change.
+              We focus on creating meaningful
+              positive change.
 
             </p>
 
@@ -1310,10 +1322,104 @@
     </section>
 
 
+    <!-- ===================================================
+         OBJECTIVES
+         =================================================== -->
 
-    <!-- =====================================================
+    <section class="section objectives-section">
+
+      <div class="container">
+
+        <div class="objectives-grid">
+
+
+          <div class="objectives-content reveal">
+
+            <span class="section-label">
+              OUR OBJECTIVES
+            </span>
+
+            <h2>
+              Preparing people for
+              future opportunities.
+            </h2>
+
+            <p>
+
+              Nexora is committed to developing
+              knowledge, skills and opportunities
+              that can create meaningful individual
+              and societal impact.
+
+            </p>
+
+          </div>
+
+
+          <div class="objectives-list reveal">
+
+            <div class="objective-item">
+              <span>01</span>
+              <p>Promote quality education and lifelong learning.</p>
+            </div>
+
+            <div class="objective-item">
+              <span>02</span>
+              <p>Enhance financial literacy and investment knowledge.</p>
+            </div>
+
+            <div class="objective-item">
+              <span>03</span>
+              <p>Develop entrepreneurial and business skills.</p>
+            </div>
+
+            <div class="objective-item">
+              <span>04</span>
+              <p>Equip learners with digital and technological competencies.</p>
+            </div>
+
+            <div class="objective-item">
+              <span>05</span>
+              <p>Foster leadership and personal development.</p>
+            </div>
+
+            <div class="objective-item">
+              <span>06</span>
+              <p>Support career advancement and professional growth.</p>
+            </div>
+
+            <div class="objective-item">
+              <span>07</span>
+              <p>Create a global community of learners and innovators.</p>
+            </div>
+
+            <div class="objective-item">
+              <span>08</span>
+              <p>Provide mentorship, coaching and networking opportunities.</p>
+            </div>
+
+            <div class="objective-item">
+              <span>09</span>
+              <p>Encourage research, innovation and problem-solving.</p>
+            </div>
+
+            <div class="objective-item">
+              <span>10</span>
+              <p>Prepare individuals for future opportunities.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
          FOUNDER
-         ===================================================== -->
+         =================================================== -->
 
     <section
       id="founder"
@@ -1322,49 +1428,36 @@
 
       <div class="container">
 
-
         <div class="founder-grid">
 
 
-          <!-- FOUNDER PLACEHOLDER -->
+          <div class="founder-image reveal">
 
-          <div class="founder-photo reveal">
+            <div class="founder-image-frame">
 
-            <div
-              class="founder-placeholder"
-              aria-label="Founder photo placeholder"
-            >
-
-              <span>
+              <div class="founder-initials">
                 AH
-              </span>
+              </div>
 
             </div>
 
           </div>
 
 
-
-          <!-- FOUNDER INFO -->
-
-          <div class="founder-info reveal">
+          <div class="founder-content reveal">
 
             <span class="section-label">
-              MEET THE FOUNDER
+              FOUNDER & EXECUTIVE DIRECTOR
             </span>
 
             <h2>
               Abdullahi Haadi O.
             </h2>
 
-            <h3>
-              Founder & Executive Director
-            </h3>
-
             <p>
 
-              Nexora Global Academy was founded with
-              a commitment to making meaningful
+              Nexora Global Academy was founded
+              with a commitment to making meaningful
               education, practical knowledge and
               personal development more accessible.
 
@@ -1376,7 +1469,7 @@
               belief that when people gain the right
               knowledge, skills and mindset, they can
               create opportunities for themselves and
-              make a positive contribution to society.
+              contribute positively to society.
 
             </p>
 
@@ -1386,7 +1479,7 @@
               <i class="fa-solid fa-quote-left"></i>
 
               <strong>
-                Empowering Minds, Transforming Futures
+                Empowering Minds, Transforming Futures.
               </strong>
 
             </div>
@@ -1401,10 +1494,9 @@
     </section>
 
 
-
-    <!-- =====================================================
+    <!-- ===================================================
          MEMBERSHIP
-         ===================================================== -->
+         =================================================== -->
 
     <section
       id="membership"
@@ -1413,70 +1505,250 @@
 
       <div class="container">
 
-
-        <div class="membership-content reveal">
-
-          <span class="eyebrow">
-            BECOME PART OF NEXORA
-          </span>
-
-          <h2>
-            Your learning journey
-            starts here.
-          </h2>
-
-          <p>
-
-            Membership is open to individuals worldwide
-            who support the vision and objectives of
-            Nexora Global Academy.
-
-          </p>
+        <div class="membership-grid">
 
 
-          <div class="membership-points">
+          <div class="membership-content reveal">
 
-            <span>
-              <i class="fa-solid fa-check"></i>
-              Educational resources
+            <span class="eyebrow">
+              BECOME PART OF NEXORA
             </span>
 
-            <span>
-              <i class="fa-solid fa-check"></i>
-              Training opportunities
-            </span>
+            <h2>
+              Your learning journey
+              starts here.
+            </h2>
 
-            <span>
-              <i class="fa-solid fa-check"></i>
-              Mentorship
-            </span>
+            <p>
 
-            <span>
-              <i class="fa-solid fa-check"></i>
-              Networking
-            </span>
+              Membership is open to individuals
+              worldwide who support the vision and
+              objectives of Nexora Global Academy.
 
-            <span>
-              <i class="fa-solid fa-check"></i>
-              Community activities
-            </span>
+            </p>
+
+
+            <div class="membership-points">
+
+              <span>
+                <i class="fa-solid fa-check"></i>
+                Educational resources
+              </span>
+
+              <span>
+                <i class="fa-solid fa-check"></i>
+                Training opportunities
+              </span>
+
+              <span>
+                <i class="fa-solid fa-check"></i>
+                Mentorship opportunities
+              </span>
+
+              <span>
+                <i class="fa-solid fa-check"></i>
+                Networking opportunities
+              </span>
+
+              <span>
+                <i class="fa-solid fa-check"></i>
+                Community activities
+              </span>
+
+            </div>
+
+
+            <a
+              class="whatsapp-large"
+              href="https://wa.me/2348167193341?text=Hello%20Nexora%20Global%20Academy%2C%20I%20am%20interested%20in%20becoming%20a%20member."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+
+              <i class="fa-brands fa-whatsapp"></i>
+
+              Chat with Nexora on WhatsApp
+
+            </a>
 
           </div>
 
 
-          <!-- Replace this link later with
-               your official membership form -->
+          <!-- MEMBERSHIP FORM -->
 
-          <a
-            href="mailto:nexoraglobalacademy@gmail.com?subject=Nexora%20Global%20Academy%20Membership%20Enquiry"
-            class="btn-light"
-          >
+          <div class="membership-form-card reveal">
 
-            Express Membership Interest
+            <h3>
+              Express Your Interest
+            </h3>
 
-            <i class="fa-solid fa-arrow-right"></i>
+            <p>
+              Join our growing community.
+            </p>
 
-          </a>
+
+            <form
+              id="membership-form"
+              novalidate
+            >
+
+              <div class="form-group">
+
+                <label for="member-name">
+                  Full Name
+                </label>
+
+                <input
+                  type="text"
+                  id="member-name"
+                  name="name"
+                  placeholder="Enter your full name"
+                  autocomplete="name"
+                  required
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="member-email">
+                  Email Address
+                </label>
+
+                <input
+                  type="email"
+                  id="member-email"
+                  name="email"
+                  placeholder="Enter your email"
+                  autocomplete="email"
+                  required
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="member-phone">
+                  WhatsApp Number
+                </label>
+
+                <input
+                  type="tel"
+                  id="member-phone"
+                  name="phone"
+                  placeholder="Enter your WhatsApp number"
+                  autocomplete="tel"
+                  required
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="member-country">
+                  Country
+                </label>
+
+                <input
+                  type="text"
+                  id="member-country"
+                  name="country"
+                  placeholder="Enter your country"
+                  autocomplete="country-name"
+                  required
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="member-interest">
+                  Area of Interest
+                </label>
+
+                <select
+                  id="member-interest"
+                  name="interest"
+                  required
+                >
+
+                  <option value="">
+                    Select an area
+                  </option>
+
+                  <option value="Financial Literacy & Investing">
+                    Financial Literacy & Investing
+                  </option>
+
+                  <option value="Entrepreneurship & Business">
+                    Entrepreneurship & Business
+                  </option>
+
+                  <option value="Technology & AI">
+                    Technology & AI
+                  </option>
+
+                  <option value="Leadership Development">
+                    Leadership Development
+                  </option>
+
+                  <option value="Personal Development">
+                    Personal Development
+                  </option>
+
+                  <option value="Career Development">
+                    Career Development
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="member-message">
+                  Why do you want to join?
+                </label>
+
+                <textarea
+                  id="member-message"
+                  name="message"
+                  rows="4"
+                  placeholder="Tell us briefly..."
+                  required
+                ></textarea>
+
+              </div>
+
+
+              <button
+                type="submit"
+                class="btn-primary form-submit"
+              >
+
+                Submit Interest
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+              </button>
+
+
+              <div
+                id="membership-status"
+                class="form-status"
+                role="status"
+                aria-live="polite"
+              ></div>
+
+            </form>
+
+          </div>
+
 
         </div>
 
@@ -1485,10 +1757,9 @@
     </section>
 
 
-
-    <!-- =====================================================
+    <!-- ===================================================
          FAQ
-         ===================================================== -->
+         =================================================== -->
 
     <section
       id="faq"
@@ -1510,23 +1781,21 @@
 
           <p>
             A few things you may want to know
-            about Nexora Global Academy.
+            about Nexora.
           </p>
 
         </div>
 
 
-
         <div class="faq">
 
-
-          <!-- FAQ 1 -->
 
           <div class="faq-item reveal">
 
             <button
               class="faq-question"
               type="button"
+              aria-expanded="false"
             >
 
               <span>
@@ -1557,14 +1826,12 @@
           </div>
 
 
-
-          <!-- FAQ 2 -->
-
           <div class="faq-item reveal">
 
             <button
               class="faq-question"
               type="button"
+              aria-expanded="false"
             >
 
               <span>
@@ -1592,14 +1859,12 @@
           </div>
 
 
-
-          <!-- FAQ 3 -->
-
           <div class="faq-item reveal">
 
             <button
               class="faq-question"
               type="button"
+              aria-expanded="false"
             >
 
               <span>
@@ -1629,14 +1894,12 @@
           </div>
 
 
-
-          <!-- FAQ 4 -->
-
           <div class="faq-item reveal">
 
             <button
               class="faq-question"
               type="button"
+              aria-expanded="false"
             >
 
               <span>
@@ -1653,11 +1916,10 @@
 
               <p>
 
-                Nexora Global Academy is a new
-                academy currently building its
-                learning community. We are welcoming
-                interested individuals who want to
-                become part of the journey.
+                Nexora Global Academy is a new academy
+                currently building its learning community.
+                We are welcoming interested individuals
+                who want to become part of the journey.
 
               </p>
 
@@ -1666,14 +1928,12 @@
           </div>
 
 
-
-          <!-- FAQ 5 -->
-
           <div class="faq-item reveal">
 
             <button
               class="faq-question"
               type="button"
+              aria-expanded="false"
             >
 
               <span>
@@ -1690,9 +1950,9 @@
 
               <p>
 
-                You can contact Nexora Global Academy
-                by email or WhatsApp using the contact
-                details provided below.
+                You can contact Nexora through email,
+                WhatsApp or Facebook using the contact
+                information provided below.
 
               </p>
 
@@ -1708,10 +1968,9 @@
     </section>
 
 
-
-    <!-- =====================================================
+    <!-- ===================================================
          CONTACT
-         ===================================================== -->
+         =================================================== -->
 
     <section
       id="contact"
@@ -1733,13 +1992,12 @@
 
           <p>
 
-            Have a question, partnership idea or
-            membership enquiry? Reach out to us.
+            Have a question, partnership idea
+            or membership enquiry?
 
           </p>
 
         </div>
-
 
 
         <div class="contact-grid">
@@ -1769,7 +2027,6 @@
           </a>
 
 
-
           <!-- WHATSAPP 1 -->
 
           <a
@@ -1794,7 +2051,6 @@
             </span>
 
           </a>
-
 
 
           <!-- WHATSAPP 2 -->
@@ -1823,7 +2079,6 @@
           </a>
 
 
-
           <!-- FACEBOOK -->
 
           <a
@@ -1844,10 +2099,141 @@
             </h3>
 
             <span>
-              Follow Nexora Global Academy
+              Nexora Global Academy
             </span>
 
           </a>
+
+
+        </div>
+
+
+        <!-- CONTACT FORM -->
+
+        <div class="contact-form-wrapper reveal">
+
+
+          <div class="contact-form-intro">
+
+            <span class="section-label">
+              SEND A MESSAGE
+            </span>
+
+            <h3>
+              We'd love to hear from you.
+            </h3>
+
+            <p>
+
+              Send us your question, partnership idea
+              or enquiry and we'll get back to you.
+
+            </p>
+
+          </div>
+
+
+          <form
+            id="contact-form"
+            novalidate
+          >
+
+            <div class="form-row">
+
+
+              <div class="form-group">
+
+                <label for="contact-name">
+                  Name
+                </label>
+
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  placeholder="Your name"
+                  autocomplete="name"
+                  required
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="contact-email">
+                  Email
+                </label>
+
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  placeholder="Your email"
+                  autocomplete="email"
+                  required
+                >
+
+              </div>
+
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="contact-subject">
+                Subject
+              </label>
+
+              <input
+                type="text"
+                id="contact-subject"
+                name="subject"
+                placeholder="What would you like to discuss?"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="contact-message">
+                Message
+              </label>
+
+              <textarea
+                id="contact-message"
+                name="message"
+                rows="6"
+                placeholder="Write your message..."
+                required
+              ></textarea>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="btn-primary form-submit"
+            >
+
+              Send Message
+
+              <i class="fa-solid fa-paper-plane"></i>
+
+            </button>
+
+
+            <div
+              id="contact-status"
+              class="form-status"
+              role="status"
+              aria-live="polite"
+            ></div>
+
+          </form>
 
 
         </div>
@@ -1857,41 +2243,44 @@
     </section>
 
 
-
-    <!-- =====================================================
+    <!-- ===================================================
          FINAL CTA
-         ===================================================== -->
+         =================================================== -->
 
     <section class="final-cta">
 
-      <div class="container reveal">
+      <div class="container">
 
-        <span class="section-label">
-          NEXORA GLOBAL ACADEMY
-        </span>
+        <div class="final-cta-content reveal">
 
-        <h2>
-          Knowledge creates possibilities.
-        </h2>
+          <span class="section-label">
+            NEXORA GLOBAL ACADEMY
+          </span>
 
-        <p>
+          <h2>
+            Knowledge creates possibilities.
+          </h2>
 
-          Start your journey with a growing global
-          community committed to learning, development,
-          innovation and positive impact.
+          <p>
 
-        </p>
+            Start your journey with a growing global
+            community committed to learning, development,
+            innovation and positive impact.
 
-        <a
-          href="#membership"
-          class="btn-primary"
-        >
+          </p>
 
-          Join Nexora
+          <a
+            href="#membership"
+            class="btn-primary"
+          >
 
-          <i class="fa-solid fa-arrow-right"></i>
+            Join Nexora
 
-        </a>
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </a>
+
+        </div>
 
       </div>
 
@@ -1901,17 +2290,15 @@
   </main>
 
 
-
   <!-- =====================================================
        FOOTER
        ===================================================== -->
 
   <footer>
 
-
     <div class="container">
 
-      <div class="footer-main">
+      <div class="footer-grid">
 
 
         <!-- BRAND -->
@@ -1923,9 +2310,10 @@
             class="logo"
           >
 
-            <div class="logo-mark">
-              N
-            </div>
+            <img
+              src="nga-logo.png"
+              alt="Nexora Global Academy Logo"
+            >
 
             <div class="logo-text">
 
@@ -1944,15 +2332,15 @@
 
           <p>
 
-            A global learning and development
-            platform dedicated to empowering
-            individuals with knowledge, skills
-            and opportunities.
+            A global learning and development platform
+            dedicated to empowering individuals with
+            knowledge, skills and opportunities.
 
           </p>
 
 
           <div class="social-links">
+
 
             <a
               href="https://www.facebook.com/share/181y8A6xAS/?mibextid=wwXIfr"
@@ -1965,6 +2353,7 @@
 
             </a>
 
+
             <a
               href="https://wa.me/2348167193341"
               target="_blank"
@@ -1976,6 +2365,7 @@
 
             </a>
 
+
             <a
               href="mailto:nexoraglobalacademy@gmail.com"
               aria-label="Email"
@@ -1985,10 +2375,10 @@
 
             </a>
 
+
           </div>
 
         </div>
-
 
 
         <!-- QUICK LINKS -->
@@ -2022,7 +2412,6 @@
         </div>
 
 
-
         <!-- LEARNING -->
 
         <div class="footer-column">
@@ -2054,7 +2443,6 @@
         </div>
 
 
-
         <!-- CONTACT -->
 
         <div class="footer-column">
@@ -2063,12 +2451,8 @@
             Contact
           </h3>
 
-          <a
-            href="mailto:nexoraglobalacademy@gmail.com"
-          >
-
+          <a href="mailto:nexoraglobalacademy@gmail.com">
             nexoraglobalacademy@gmail.com
-
           </a>
 
           <a
@@ -2076,9 +2460,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-
             08167193341
-
           </a>
 
           <a
@@ -2086,9 +2468,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-
             09035070966
-
           </a>
 
           <a
@@ -2096,9 +2476,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-
             Facebook
-
           </a>
 
         </div>
@@ -2111,24 +2489,21 @@
 
       <div class="footer-bottom">
 
-        <div class="container">
+        <p>
 
-          <p>
+          ©
+          <span data-current-year>
+            2026
+          </span>
 
-            ©
-            <span data-current-year>
-              2026
-            </span>
-            Nexora Global Academy.
-            All rights reserved.
+          Nexora Global Academy.
+          All rights reserved.
 
-          </p>
+        </p>
 
-          <p>
-            Empowering Minds, Transforming Futures.
-          </p>
-
-        </div>
+        <p>
+          Empowering Minds, Transforming Futures.
+        </p>
 
       </div>
 
@@ -2137,6 +2512,26 @@
 
   </footer>
 
+
+  <!-- =====================================================
+       FLOATING WHATSAPP
+       ===================================================== -->
+
+  <a
+    class="floating-whatsapp"
+    href="https://wa.me/2348167193341?text=Hello%20Nexora%20Global%20Academy%2C%20I%20would%20like%20to%20make%20an%20enquiry."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with Nexora Global Academy on WhatsApp"
+  >
+
+    <i class="fa-brands fa-whatsapp"></i>
+
+    <span>
+      Chat with us
+    </span>
+
+  </a>
 
 
   <!-- =====================================================
@@ -2154,12 +2549,12 @@
   </button>
 
 
-
   <!-- =====================================================
        JAVASCRIPT
        ===================================================== -->
 
-  <script src="js/script.js"></script>
+  <script src="script.js"></script>
 
 </body>
+
 </html>
