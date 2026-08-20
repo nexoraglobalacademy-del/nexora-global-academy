@@ -1,90 +1,68 @@
 /* =========================================================
    NEXORA GLOBAL ACADEMY
-   SCRIPT.JS — VERSION 2.0
+   Main JavaScript
+   Version 1.0
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =======================================================
-     1. PAGE LOAD
-     ======================================================= */
-
-  document.body.classList.add("page-loaded");
-
-
-  /* =======================================================
-     2. MOBILE NAVIGATION
+     1. MOBILE NAVIGATION
      ======================================================= */
 
   const menuToggle = document.querySelector(".menu-toggle");
-  const navigation = document.querySelector("#main-navigation");
+  const nav = document.querySelector("nav");
+  const navLinks = document.querySelectorAll("nav a");
 
-  if (menuToggle && navigation) {
+  if (menuToggle && nav) {
 
     menuToggle.addEventListener("click", () => {
 
-      const isOpen =
-        navigation.classList.toggle("active");
+      const isOpen = nav.classList.toggle("open");
 
-      menuToggle.classList.toggle(
-        "active",
-        isOpen
-      );
+      document.body.classList.toggle("menu-open", isOpen);
 
-      menuToggle.setAttribute(
-        "aria-expanded",
-        isOpen ? "true" : "false"
-      );
+      menuToggle.setAttribute("aria-expanded", isOpen);
+
+      menuToggle.classList.toggle("active", isOpen);
 
     });
 
+    /* Close menu when a navigation link is clicked */
 
-    /* Close menu when navigation link is clicked */
-
-    const navigationLinks =
-      navigation.querySelectorAll("a");
-
-    navigationLinks.forEach((link) => {
+    navLinks.forEach(link => {
 
       link.addEventListener("click", () => {
 
-        navigation.classList.remove("active");
+        nav.classList.remove("open");
+
+        document.body.classList.remove("menu-open");
 
         menuToggle.classList.remove("active");
 
-        menuToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
+        menuToggle.setAttribute("aria-expanded", "false");
 
       });
 
     });
-
 
     /* Close menu when clicking outside */
 
-    document.addEventListener("click", (event) => {
-
-      const clickedInsideNavigation =
-        navigation.contains(event.target);
-
-      const clickedMenuButton =
-        menuToggle.contains(event.target);
+    document.addEventListener("click", event => {
 
       if (
-        !clickedInsideNavigation &&
-        !clickedMenuButton
+        nav.classList.contains("open") &&
+        !nav.contains(event.target) &&
+        !menuToggle.contains(event.target)
       ) {
 
-        navigation.classList.remove("active");
+        nav.classList.remove("open");
+
+        document.body.classList.remove("menu-open");
 
         menuToggle.classList.remove("active");
 
-        menuToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
+        menuToggle.setAttribute("aria-expanded", "false");
 
       }
 
@@ -94,545 +72,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     3. STICKY HEADER EFFECT
+     2. ACTIVE NAVIGATION LINK
      ======================================================= */
 
-  const header =
-    document.querySelector("#header");
+  const sections = document.querySelectorAll("section[id]");
 
-  const handleHeaderScroll = () => {
+  const updateActiveNav = () => {
 
-    if (!header) return;
+    const scrollPosition = window.scrollY + 140;
 
-    if (window.scrollY > 20) {
+    sections.forEach(section => {
 
-      header.classList.add("scrolled");
+      const sectionTop = section.offsetTop;
 
-    } else {
+      const sectionHeight = section.offsetHeight;
 
-      header.classList.remove("scrolled");
+      const sectionId = section.getAttribute("id");
 
-    }
+      const link = document.querySelector(
+        `nav a[href="#${sectionId}"]`
+      );
 
-  };
-
-  handleHeaderScroll();
-
-  window.addEventListener(
-    "scroll",
-    handleHeaderScroll,
-    { passive: true }
-  );
-
-
-  /* =======================================================
-     4. ACTIVE NAVIGATION LINK
-     ======================================================= */
-
-  const sections =
-    document.querySelectorAll("section[id]");
-
-  const navLinks =
-    document.querySelectorAll(
-      '#main-navigation a[href^="#"]'
-    );
-
-  const updateActiveNavigation = () => {
-
-    if (!sections.length || !navLinks.length) {
-      return;
-    }
-
-    const scrollPosition =
-      window.scrollY + 130;
-
-    let currentSection = "";
-
-    sections.forEach((section) => {
-
-      const sectionTop =
-        section.offsetTop;
-
-      const sectionHeight =
-        section.offsetHeight;
+      if (!link) return;
 
       if (
         scrollPosition >= sectionTop &&
-        scrollPosition <
-          sectionTop + sectionHeight
+        scrollPosition < sectionTop + sectionHeight
       ) {
 
-        currentSection =
-          section.getAttribute("id");
+        navLinks.forEach(navLink => {
+          navLink.classList.remove("active");
+        });
+
+        link.classList.add("active");
 
       }
-
-    });
-
-    navLinks.forEach((link) => {
-
-      const href =
-        link.getAttribute("href");
-
-      link.classList.toggle(
-        "active",
-        href === `#${currentSection}`
-      );
 
     });
 
   };
 
-  updateActiveNavigation();
+  window.addEventListener("scroll", updateActiveNav);
 
-  window.addEventListener(
-    "scroll",
-    updateActiveNavigation,
-    { passive: true }
-  );
+  updateActiveNav();
 
 
   /* =======================================================
-     5. SMOOTH SCROLLING
+     3. BACK TO TOP BUTTON
      ======================================================= */
 
-  document
-    .querySelectorAll('a[href^="#"]')
-    .forEach((link) => {
-
-      link.addEventListener(
-        "click",
-        (event) => {
-
-          const targetId =
-            link.getAttribute("href");
-
-          if (
-            !targetId ||
-            targetId === "#"
-          ) {
-            return;
-          }
-
-          const target =
-            document.querySelector(targetId);
-
-          if (!target) {
-            return;
-          }
-
-          event.preventDefault();
-
-          const headerHeight =
-            header
-              ? header.offsetHeight
-              : 0;
-
-          const targetPosition =
-            target.getBoundingClientRect().top +
-            window.scrollY -
-            headerHeight;
-
-          window.scrollTo({
-            top: targetPosition,
-            behavior: "smooth"
-          });
-
-          /*
-           * Update URL without jumping.
-           */
-
-          if (
-            history.pushState &&
-            targetId
-          ) {
-
-            history.pushState(
-              null,
-              "",
-              targetId
-            );
-
-          }
-
-        }
-      );
-
-    });
-
-
-  /* =======================================================
-     6. FAQ ACCORDION
-     ======================================================= */
-
-  const faqItems =
-    document.querySelectorAll(".faq-item");
-
-  faqItems.forEach((item) => {
-
-    const question =
-      item.querySelector(".faq-question");
-
-    const answer =
-      item.querySelector(".faq-answer");
-
-    if (!question || !answer) {
-      return;
-    }
-
-    question.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-
-    question.addEventListener(
-      "click",
-      () => {
-
-        const isActive =
-          item.classList.contains("active");
-
-
-        /*
-         * Close every other FAQ item.
-         */
-
-        faqItems.forEach((otherItem) => {
-
-          if (otherItem !== item) {
-
-            otherItem.classList.remove(
-              "active"
-            );
-
-            const otherQuestion =
-              otherItem.querySelector(
-                ".faq-question"
-              );
-
-            const otherAnswer =
-              otherItem.querySelector(
-                ".faq-answer"
-              );
-
-            if (otherQuestion) {
-
-              otherQuestion.setAttribute(
-                "aria-expanded",
-                "false"
-              );
-
-            }
-
-            if (otherAnswer) {
-
-              otherAnswer.style.maxHeight =
-                null;
-
-            }
-
-          }
-
-        });
-
-
-        /*
-         * Toggle selected FAQ.
-         */
-
-        if (isActive) {
-
-          item.classList.remove("active");
-
-          question.setAttribute(
-            "aria-expanded",
-            "false"
-          );
-
-          answer.style.maxHeight = null;
-
-        } else {
-
-          item.classList.add("active");
-
-          question.setAttribute(
-            "aria-expanded",
-            "true"
-          );
-
-          answer.style.maxHeight =
-            answer.scrollHeight + "px";
-
-        }
-
-      }
-    );
-
-  });
-
-
-  /* =======================================================
-     7. SCROLL REVEAL ANIMATION
-     ======================================================= */
-
-  const revealElements =
-    document.querySelectorAll(".reveal");
-
-  if (
-    revealElements.length &&
-    "IntersectionObserver" in window
-  ) {
-
-    const revealObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
-
-          entries.forEach((entry) => {
-
-            if (entry.isIntersecting) {
-
-              entry.target.classList.add(
-                "show"
-              );
-
-              observer.unobserve(
-                entry.target
-              );
-
-            }
-
-          });
-
-        },
-        {
-          threshold: 0.12,
-          rootMargin: "0px 0px -40px 0px"
-        }
-      );
-
-    revealElements.forEach((element) => {
-
-      revealObserver.observe(element);
-
-    });
-
-  } else {
-
-    /*
-     * Fallback for older browsers.
-     */
-
-    revealElements.forEach((element) => {
-
-      element.classList.add("show");
-
-    });
-
-  }
-
-
-  /* =======================================================
-     8. CARD STAGGER ANIMATION
-     ======================================================= */
-
-  const cardGroups = [
-    ".programme-card",
-    ".value-card",
-    ".benefit-item",
-    ".contact-card"
-  ];
-
-  cardGroups.forEach((selector) => {
-
-    const cards =
-      document.querySelectorAll(selector);
-
-    cards.forEach((card, index) => {
-
-      card.style.transitionDelay =
-        `${index * 70}ms`;
-
-    });
-
-  });
-
-
-  /* =======================================================
-     9. ESC KEY
-     ======================================================= */
-
-  document.addEventListener(
-    "keydown",
-    (event) => {
-
-      if (event.key !== "Escape") {
-        return;
-      }
-
-      /*
-       * Close mobile navigation.
-       */
-
-      if (
-        navigation &&
-        menuToggle
-      ) {
-
-        navigation.classList.remove(
-          "active"
-        );
-
-        menuToggle.classList.remove(
-          "active"
-        );
-
-        menuToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-      }
-
-
-      /*
-       * Close FAQ items.
-       */
-
-      faqItems.forEach((item) => {
-
-        item.classList.remove("active");
-
-        const question =
-          item.querySelector(
-            ".faq-question"
-          );
-
-        const answer =
-          item.querySelector(
-            ".faq-answer"
-          );
-
-        if (question) {
-
-          question.setAttribute(
-            "aria-expanded",
-            "false"
-          );
-
-        }
-
-        if (answer) {
-
-          answer.style.maxHeight =
-            null;
-
-        }
-
-      });
-
-    }
-  );
-
-
-  /* =======================================================
-     10. RESIZE HANDLER
-     ======================================================= */
-
-  let resizeTimer;
-
-  window.addEventListener(
-    "resize",
-    () => {
-
-      clearTimeout(resizeTimer);
-
-      resizeTimer =
-        setTimeout(() => {
-
-          /*
-           * Reset FAQ heights after resize.
-           */
-
-          faqItems.forEach((item) => {
-
-            const answer =
-              item.querySelector(
-                ".faq-answer"
-              );
-
-            if (
-              answer &&
-              item.classList.contains(
-                "active"
-              )
-            ) {
-
-              answer.style.maxHeight =
-                answer.scrollHeight + "px";
-
-            }
-
-          });
-
-        }, 150);
-
-    }
-  );
-
-
-  /* =======================================================
-     11. WHATSAPP BUTTON TRACKING
-     ======================================================= */
-
-  const whatsappLinks =
-    document.querySelectorAll(
-      'a[href*="wa.me"], a[href*="whatsapp"]'
-    );
-
-  whatsappLinks.forEach((link) => {
-
-    link.addEventListener(
-      "click",
-      () => {
-
-        console.log(
-          "Nexora WhatsApp contact clicked."
-        );
-
-      }
-    );
-
-  });
-
-
-  /* =======================================================
-     12. CURRENT YEAR
-     ======================================================= */
-
-  const yearElements =
-    document.querySelectorAll(
-      "[data-current-year]"
-    );
-
-  const currentYear =
-    new Date().getFullYear();
-
-  yearElements.forEach((element) => {
-
-    element.textContent =
-      currentYear;
-
-  });
-
-
-  /* =======================================================
-     13. BACK TO TOP
-     ======================================================= */
-
-  const backToTop =
-    document.querySelector(
-      "#back-to-top"
-    );
+  const backToTop = document.querySelector("#back-to-top");
 
   if (backToTop) {
 
@@ -640,46 +129,526 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (window.scrollY > 500) {
 
-        backToTop.classList.add(
-          "visible"
-        );
+        backToTop.classList.add("show");
 
       } else {
 
-        backToTop.classList.remove(
-          "visible"
-        );
+        backToTop.classList.remove("show");
 
       }
 
     };
 
+    window.addEventListener("scroll", toggleBackToTop);
+
     toggleBackToTop();
 
-    window.addEventListener(
-      "scroll",
-      toggleBackToTop,
-      { passive: true }
-    );
+    backToTop.addEventListener("click", () => {
 
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
-    backToTop.addEventListener(
-      "click",
-      () => {
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-
-      }
-    );
+    });
 
   }
 
 
   /* =======================================================
-     14. CONSOLE MESSAGE
+     4. FAQ ACCORDION
+     ======================================================= */
+
+  const faqQuestions = document.querySelectorAll(".faq-question");
+
+  faqQuestions.forEach(question => {
+
+    question.addEventListener("click", () => {
+
+      const answer = question.nextElementSibling;
+
+      const isExpanded =
+        question.getAttribute("aria-expanded") === "true";
+
+      /* Close all other FAQ items */
+
+      faqQuestions.forEach(otherQuestion => {
+
+        if (otherQuestion !== question) {
+
+          otherQuestion.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          const otherAnswer =
+            otherQuestion.nextElementSibling;
+
+          if (otherAnswer) {
+
+            otherAnswer.style.maxHeight = null;
+
+          }
+
+        }
+
+      });
+
+      /* Toggle current FAQ */
+
+      question.setAttribute(
+        "aria-expanded",
+        String(!isExpanded)
+      );
+
+      if (!isExpanded) {
+
+        answer.style.maxHeight =
+          answer.scrollHeight + "px";
+
+      } else {
+
+        answer.style.maxHeight = null;
+
+      }
+
+    });
+
+  });
+
+
+  /* =======================================================
+     5. SCROLL REVEAL ANIMATION
+     ======================================================= */
+
+  const revealElements =
+    document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+              observer.unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+    revealElements.forEach(element => {
+
+      revealObserver.observe(element);
+
+    });
+
+  } else {
+
+    revealElements.forEach(element => {
+
+      element.classList.add("visible");
+
+    });
+
+  }
+
+
+  /* =======================================================
+     6. MEMBERSHIP FORM
+     ======================================================= */
+
+  const membershipForm =
+    document.querySelector("#membership-form");
+
+  const membershipStatus =
+    document.querySelector("#membership-status");
+
+  if (membershipForm) {
+
+    membershipForm.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      const formData =
+        new FormData(membershipForm);
+
+      const name =
+        formData.get("name");
+
+      const email =
+        formData.get("email");
+
+      const phone =
+        formData.get("phone");
+
+      const country =
+        formData.get("country");
+
+      const interest =
+        formData.get("interest");
+
+      if (!name || !email || !phone) {
+
+        if (membershipStatus) {
+
+          membershipStatus.textContent =
+            "Please complete all required fields.";
+
+          membershipStatus.className =
+            "form-status error";
+
+        }
+
+        return;
+
+      }
+
+      /*
+       * Nexora currently has no backend/database.
+       *
+       * For now we prepare the membership information
+       * and open WhatsApp so the application can be
+       * completed manually.
+       */
+
+      const message =
+        `NEXORA GLOBAL ACADEMY MEMBERSHIP APPLICATION\n\n` +
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Phone: ${phone}\n` +
+        `Country: ${country || "Not provided"}\n` +
+        `Area of Interest: ${interest || "Not provided"}\n\n` +
+        `I would like to become a member of Nexora Global Academy.`;
+
+      const whatsappNumber =
+        "2348167193341";
+
+      const whatsappURL =
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+      if (membershipStatus) {
+
+        membershipStatus.textContent =
+          "Application prepared. Redirecting you to WhatsApp...";
+
+        membershipStatus.className =
+          "form-status success";
+
+      }
+
+      setTimeout(() => {
+
+        window.open(
+          whatsappURL,
+          "_blank",
+          "noopener,noreferrer"
+        );
+
+      }, 700);
+
+    });
+
+  }
+
+
+  /* =======================================================
+     7. CONTACT FORM
+     ======================================================= */
+
+  const contactForm =
+    document.querySelector("#contact-form");
+
+  const contactStatus =
+    document.querySelector("#contact-status");
+
+  if (contactForm) {
+
+    contactForm.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      const formData =
+        new FormData(contactForm);
+
+      const name =
+        formData.get("name");
+
+      const email =
+        formData.get("email");
+
+      const subject =
+        formData.get("subject");
+
+      const message =
+        formData.get("message");
+
+      if (!name || !email || !message) {
+
+        if (contactStatus) {
+
+          contactStatus.textContent =
+            "Please complete the required fields.";
+
+          contactStatus.className =
+            "form-status error";
+
+        }
+
+        return;
+
+      }
+
+      /*
+       * Since Nexora does not yet have a backend,
+       * we use the user's email application.
+       */
+
+      const emailAddress =
+        "nexoraglobalacademy@gmail.com";
+
+      const emailSubject =
+        subject
+          ? `Nexora Website: ${subject}`
+          : "Nexora Global Academy Website Enquiry";
+
+      const emailBody =
+        `Name: ${name}\n` +
+        `Email: ${email}\n\n` +
+        `${message}`;
+
+      const mailtoURL =
+        `mailto:${emailAddress}` +
+        `?subject=${encodeURIComponent(emailSubject)}` +
+        `&body=${encodeURIComponent(emailBody)}`;
+
+      if (contactStatus) {
+
+        contactStatus.textContent =
+          "Opening your email application...";
+
+        contactStatus.className =
+          "form-status success";
+
+      }
+
+      window.location.href = mailtoURL;
+
+    });
+
+  }
+
+
+  /* =======================================================
+     8. WHATSAPP LINKS
+     ======================================================= */
+
+  const whatsappLinks =
+    document.querySelectorAll("[data-whatsapp]");
+
+  whatsappLinks.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      const message =
+        link.getAttribute("data-whatsapp") ||
+        "Hello Nexora Global Academy. I would like to make an enquiry.";
+
+      const number =
+        "2348167193341";
+
+      const url =
+        `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+
+      link.href = url;
+
+    });
+
+  });
+
+
+  /* =======================================================
+     9. SMOOTH SCROLL
+     ======================================================= */
+
+  const anchorLinks =
+    document.querySelectorAll('a[href^="#"]');
+
+  anchorLinks.forEach(link => {
+
+    link.addEventListener("click", event => {
+
+      const targetId =
+        link.getAttribute("href");
+
+      if (
+        !targetId ||
+        targetId === "#" ||
+        targetId.length < 2
+      ) {
+        return;
+      }
+
+      const target =
+        document.querySelector(targetId);
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    });
+
+  });
+
+
+  /* =======================================================
+     10. CURRENT YEAR
+     ======================================================= */
+
+  const yearElements =
+    document.querySelectorAll("[data-current-year]");
+
+  yearElements.forEach(element => {
+
+    element.textContent =
+      new Date().getFullYear();
+
+  });
+
+
+  /* =======================================================
+     11. HEADER SHADOW ON SCROLL
+     ======================================================= */
+
+  const header =
+    document.querySelector("#header");
+
+  if (header) {
+
+    const updateHeader =
+      () => {
+
+        if (window.scrollY > 20) {
+
+          header.classList.add("scrolled");
+
+        } else {
+
+          header.classList.remove("scrolled");
+
+        }
+
+      };
+
+    window.addEventListener(
+      "scroll",
+      updateHeader
+    );
+
+    updateHeader();
+
+  }
+
+
+  /* =======================================================
+     12. PREVENT MULTIPLE FORM SUBMISSIONS
+     ======================================================= */
+
+  const forms =
+    document.querySelectorAll("form");
+
+  forms.forEach(form => {
+
+    form.addEventListener("submit", () => {
+
+      const submitButton =
+        form.querySelector(
+          'button[type="submit"], input[type="submit"]'
+        );
+
+      if (!submitButton) return;
+
+      setTimeout(() => {
+
+        submitButton.blur();
+
+      }, 300);
+
+    });
+
+  });
+
+
+  /* =======================================================
+     13. ESCAPE KEY
+     Close mobile menu
+     ======================================================= */
+
+  document.addEventListener("keydown", event => {
+
+    if (event.key !== "Escape") return;
+
+    if (
+      nav &&
+      nav.classList.contains("open")
+    ) {
+
+      nav.classList.remove("open");
+
+      document.body.classList.remove("menu-open");
+
+      if (menuToggle) {
+
+        menuToggle.classList.remove("active");
+
+        menuToggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      }
+
+    }
+
+  });
+
+
+  /* =======================================================
+     14. IMAGE ERROR HANDLING
+     ======================================================= */
+
+  const images =
+    document.querySelectorAll("img");
+
+  images.forEach(image => {
+
+    image.addEventListener("error", () => {
+
+      image.classList.add("image-error");
+
+    });
+
+  });
+
+
+  /* =======================================================
+     15. CONSOLE MESSAGE
      ======================================================= */
 
   console.log(
