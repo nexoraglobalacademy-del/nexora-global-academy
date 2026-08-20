@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Nexora Global Academy empowers future leaders through technology, finance, entrepreneurship, innovation and lifelong learning.">
-    <meta name="keywords" content="Nexora Global Academy, coding, artificial intelligence, investing, entrepreneurship, digital skills, leadership">
+    <meta
+        name="description"
+        content="Nexora Global Academy empowers future leaders through technology, finance, entrepreneurship, innovation and lifelong learning."
+    >
+
+    <meta
+        name="keywords"
+        content="Nexora Global Academy, coding, artificial intelligence, investing, entrepreneurship, digital skills, leadership"
+    >
+
     <meta name="author" content="Nexora Global Academy">
 
     <title>Nexora Global Academy | Empowering Future Leaders</title>
@@ -15,7 +23,11 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <!-- Font Awesome -->
     <link
@@ -877,6 +889,8 @@
                     Complete the form below to register your interest.
                 </p>
 
+                <!-- MEMBERSHIP FORM -->
+
                 <form id="membershipForm">
 
                     <div class="input-group">
@@ -886,7 +900,7 @@
                         <input
                             type="text"
                             id="fullName"
-                            name="fullName"
+                            name="name"
                             placeholder="Enter your full name"
                             required
                         >
@@ -928,7 +942,11 @@
 
                         <label for="interest">Area of Interest</label>
 
-                        <select id="interest" name="interest" required>
+                        <select
+                            id="interest"
+                            name="interest"
+                            required
+                        >
 
                             <option value="" selected disabled>
                                 Select an area
@@ -967,7 +985,10 @@
                     </div>
 
 
-                    <button type="submit" class="form-submit">
+                    <button
+                        type="submit"
+                        class="form-submit"
+                    >
 
                         Register Interest
 
@@ -975,7 +996,12 @@
 
                     </button>
 
-                    <p id="message" class="form-message"></p>
+                    <p
+                        id="message"
+                        class="form-message"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
 
                 </form>
 
@@ -1024,7 +1050,9 @@
 
                 <div>
                     <span>Email Us</span>
-                    <strong>nexoraglobalacademy@gmail.com</strong>
+                    <strong>
+                        nexoraglobalacademy@gmail.com
+                    </strong>
                 </div>
 
             </a>
@@ -1093,7 +1121,9 @@
 
                 <div class="brand-text">
                     <span class="brand-name">NEXORA</span>
-                    <span class="brand-subtitle">GLOBAL ACADEMY</span>
+                    <span class="brand-subtitle">
+                        GLOBAL ACADEMY
+                    </span>
                 </div>
 
             </a>
@@ -1122,13 +1152,13 @@
                 </a>
 
                 <a
-    href="https://www.facebook.com/share/1CBZ5wK6ZY/?mibextid=wwXIfr"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Facebook"
->
-    <i class="fab fa-facebook-f"></i>
-</a>
+                    href="https://www.facebook.com/share/1CBZ5wK6ZY/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                >
+                    <i class="fab fa-facebook-f"></i>
+                </a>
 
             </div>
 
@@ -1220,8 +1250,12 @@
 </button>
 
 
-<!-- Main JavaScript -->
+<!-- ================= EMAILJS ================= -->
 
+<!-- EmailJS Browser SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- Main JavaScript -->
 <script src="script.js"></script>
 
 </body>
