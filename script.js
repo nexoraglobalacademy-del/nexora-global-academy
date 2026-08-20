@@ -1,6 +1,7 @@
-//* =========================================================
+/* =========================================================
    NEXORA GLOBAL ACADEMY
    Main JavaScript
+   EmailJS Membership Integration
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,6 +17,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const message = document.getElementById("message");
     const backToTop = document.getElementById("back-to-top");
     const currentYear = document.getElementById("current-year");
+
+
+    /* ================= EMAILJS CONFIGURATION ================= */
+
+    const EMAILJS_PUBLIC_KEY = "RQ04loHbKG6VxWkki";
+    const EMAILJS_SERVICE_ID = "service_ewq50to";
+    const EMAILJS_TEMPLATE_ID = "template_zn1he6n";
+
+
+    /* ================= INITIALIZE EMAILJS ================= */
+
+    if (typeof emailjs !== "undefined") {
+
+        emailjs.init({
+            publicKey: EMAILJS_PUBLIC_KEY
+        });
+
+    } else {
+
+        console.error(
+            "EmailJS SDK was not loaded."
+        );
+
+    }
 
 
     /* ================= CURRENT YEAR ================= */
@@ -48,11 +73,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         updateActiveNavigation();
+
     };
 
-    window.addEventListener("scroll", handleScroll, {
-        passive: true
-    });
+
+    window.addEventListener(
+        "scroll",
+        handleScroll,
+        {
+            passive: true
+        }
+    );
+
 
     handleScroll();
 
@@ -61,30 +93,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (mobileMenuBtn && navWrapper) {
 
-        mobileMenuBtn.addEventListener("click", () => {
+        mobileMenuBtn.addEventListener(
+            "click",
+            () => {
 
-            const isOpen = navWrapper.classList.toggle("open");
+                const isOpen =
+                    navWrapper.classList.toggle("open");
 
-            mobileMenuBtn.setAttribute(
-                "aria-expanded",
-                String(isOpen)
-            );
+                mobileMenuBtn.setAttribute(
+                    "aria-expanded",
+                    String(isOpen)
+                );
 
-            const icon = mobileMenuBtn.querySelector("i");
+                const icon =
+                    mobileMenuBtn.querySelector("i");
 
-            if (icon) {
+                if (icon) {
 
-                if (isOpen) {
-                    icon.classList.remove("fa-bars");
-                    icon.classList.add("fa-xmark");
-                } else {
-                    icon.classList.remove("fa-xmark");
-                    icon.classList.add("fa-bars");
+                    if (isOpen) {
+
+                        icon.classList.remove(
+                            "fa-bars"
+                        );
+
+                        icon.classList.add(
+                            "fa-xmark"
+                        );
+
+                    } else {
+
+                        icon.classList.remove(
+                            "fa-xmark"
+                        );
+
+                        icon.classList.add(
+                            "fa-bars"
+                        );
+
+                    }
+
                 }
 
             }
-
-        });
+        );
 
     }
 
@@ -93,25 +144,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     navLinks.forEach((link) => {
 
-        link.addEventListener("click", () => {
+        link.addEventListener(
+            "click",
+            () => {
 
-            if (!navWrapper || !mobileMenuBtn) return;
+                if (
+                    !navWrapper ||
+                    !mobileMenuBtn
+                ) {
+                    return;
+                }
 
-            navWrapper.classList.remove("open");
+                navWrapper.classList.remove(
+                    "open"
+                );
 
-            mobileMenuBtn.setAttribute(
-                "aria-expanded",
-                "false"
-            );
+                mobileMenuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
 
-            const icon = mobileMenuBtn.querySelector("i");
+                const icon =
+                    mobileMenuBtn.querySelector("i");
 
-            if (icon) {
-                icon.classList.remove("fa-xmark");
-                icon.classList.add("fa-bars");
+                if (icon) {
+
+                    icon.classList.remove(
+                        "fa-xmark"
+                    );
+
+                    icon.classList.add(
+                        "fa-bars"
+                    );
+
+                }
+
             }
-
-        });
+        );
 
     });
 
@@ -120,9 +189,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateActiveNavigation() {
 
-        const sections = document.querySelectorAll(
-            "main section[id]"
-        );
+        const sections =
+            document.querySelectorAll(
+                "main section[id]"
+            );
 
         const scrollPosition =
             window.scrollY +
@@ -132,26 +202,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
         sections.forEach((section) => {
 
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
+            const sectionTop =
+                section.offsetTop;
+
+            const sectionHeight =
+                section.offsetHeight;
 
             if (
                 scrollPosition >= sectionTop &&
-                scrollPosition < sectionTop + sectionHeight
+                scrollPosition <
+                sectionTop + sectionHeight
             ) {
-                currentSection = section.id;
+
+                currentSection =
+                    section.id;
+
             }
 
         });
 
+
         navLinks.forEach((link) => {
 
-            const target = link.getAttribute("href");
+            const target =
+                link.getAttribute("href");
 
-            if (target === `#${currentSection}`) {
-                link.classList.add("active");
+            if (
+                target ===
+                `#${currentSection}`
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
             } else {
-                link.classList.remove("active");
+
+                link.classList.remove(
+                    "active"
+                );
+
             }
 
         });
@@ -162,32 +252,49 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ================= DARK MODE ================= */
 
     const savedTheme =
-        localStorage.getItem("nexora-theme");
+        localStorage.getItem(
+            "nexora-theme"
+        );
+
 
     if (savedTheme === "dark") {
-        document.body.classList.add("dark-mode");
+
+        document.body.classList.add(
+            "dark-mode"
+        );
+
     }
+
 
     updateThemeIcon();
 
 
     if (themeToggle) {
 
-        themeToggle.addEventListener("click", () => {
+        themeToggle.addEventListener(
+            "click",
+            () => {
 
-            document.body.classList.toggle("dark-mode");
+                document.body.classList.toggle(
+                    "dark-mode"
+                );
 
-            const isDark =
-                document.body.classList.contains("dark-mode");
+                const isDark =
+                    document.body.classList.contains(
+                        "dark-mode"
+                    );
 
-            localStorage.setItem(
-                "nexora-theme",
-                isDark ? "dark" : "light"
-            );
+                localStorage.setItem(
+                    "nexora-theme",
+                    isDark
+                        ? "dark"
+                        : "light"
+                );
 
-            updateThemeIcon();
+                updateThemeIcon();
 
-        });
+            }
+        );
 
     }
 
@@ -202,12 +309,20 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!icon) return;
 
         const isDark =
-            document.body.classList.contains("dark-mode");
+            document.body.classList.contains(
+                "dark-mode"
+            );
+
 
         if (isDark) {
 
-            icon.classList.remove("fa-moon");
-            icon.classList.add("fa-sun");
+            icon.classList.remove(
+                "fa-moon"
+            );
+
+            icon.classList.add(
+                "fa-sun"
+            );
 
             themeToggle.setAttribute(
                 "aria-label",
@@ -221,8 +336,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } else {
 
-            icon.classList.remove("fa-sun");
-            icon.classList.add("fa-moon");
+            icon.classList.remove(
+                "fa-sun"
+            );
+
+            icon.classList.add(
+                "fa-moon"
+            );
 
             themeToggle.setAttribute(
                 "aria-label",
@@ -245,21 +365,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
         membershipForm.addEventListener(
             "submit",
-            (event) => {
+            async (event) => {
 
                 event.preventDefault();
 
+
+                /* ---------- Check EmailJS ---------- */
+
+                if (
+                    typeof emailjs ===
+                    "undefined"
+                ) {
+
+                    message.textContent =
+                        "Email service is currently unavailable. Please try again later.";
+
+                    message.className =
+                        "form-message error";
+
+                    console.error(
+                        "EmailJS is not available."
+                    );
+
+                    return;
+
+                }
+
+
+                /* ---------- Get Fields ---------- */
+
                 const fullName =
-                    document.getElementById("fullName");
+                    document.getElementById(
+                        "fullName"
+                    );
 
                 const email =
-                    document.getElementById("email");
+                    document.getElementById(
+                        "email"
+                    );
 
                 const country =
-                    document.getElementById("country");
+                    document.getElementById(
+                        "country"
+                    );
 
                 const interest =
-                    document.getElementById("interest");
+                    document.getElementById(
+                        "interest"
+                    );
 
 
                 if (
@@ -269,9 +422,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     !interest ||
                     !message
                 ) {
+
+                    console.error(
+                        "One or more membership form fields are missing."
+                    );
+
                     return;
+
                 }
 
+
+                /* ---------- Get Values ---------- */
 
                 const name =
                     fullName.value.trim();
@@ -285,6 +446,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const interestValue =
                     interest.value;
 
+
+                /* ---------- Validation ---------- */
 
                 if (
                     !name ||
@@ -300,6 +463,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "form-message error";
 
                     return;
+
                 }
 
 
@@ -307,7 +471,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-                if (!emailPattern.test(emailValue)) {
+                if (
+                    !emailPattern.test(
+                        emailValue
+                    )
+                ) {
 
                     message.textContent =
                         "Please enter a valid email address.";
@@ -316,23 +484,107 @@ document.addEventListener("DOMContentLoaded", () => {
                         "form-message error";
 
                     return;
+
                 }
 
 
-                /*
-                 * The website currently does not have a backend.
-                 * Therefore, this confirms the submission locally
-                 * instead of pretending that data was sent to a server.
-                 */
+                /* ---------- Loading State ---------- */
+
+                const submitButton =
+                    membershipForm.querySelector(
+                        'button[type="submit"]'
+                    );
+
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        true;
+
+                    submitButton.innerHTML =
+                        `
+                        Sending...
+                        <i class="fas fa-spinner fa-spin"></i>
+                        `;
+
+                }
+
 
                 message.textContent =
-                    `Thank you, ${name}! Your interest in Nexora Global Academy has been recorded on this device.`;
+                    "Submitting your registration...";
 
                 message.className =
-                    "form-message success";
+                    "form-message";
 
 
-                membershipForm.reset();
+                /* ---------- Send EmailJS ---------- */
+
+                try {
+
+                    /*
+                     * The HTML form uses:
+                     *
+                     * name
+                     * email
+                     * country
+                     * interest
+                     *
+                     * These correspond to the
+                     * variables in your EmailJS template.
+                     */
+
+                    await emailjs.sendForm(
+                        EMAILJS_SERVICE_ID,
+                        EMAILJS_TEMPLATE_ID,
+                        membershipForm
+                    );
+
+
+                    /* ---------- Success ---------- */
+
+                    message.textContent =
+                        `Thank you, ${name}! Your registration was successful. Please check your email for a welcome message.`;
+
+                    message.className =
+                        "form-message success";
+
+
+                    membershipForm.reset();
+
+
+                } catch (error) {
+
+                    console.error(
+                        "EmailJS Error:",
+                        error
+                    );
+
+
+                    message.textContent =
+                        "We couldn't complete your registration right now. Please try again.";
+
+                    message.className =
+                        "form-message error";
+
+
+                } finally {
+
+                    /* ---------- Restore Button ---------- */
+
+                    if (submitButton) {
+
+                        submitButton.disabled =
+                            false;
+
+                        submitButton.innerHTML =
+                            `
+                            Register Interest
+                            <i class="fas fa-arrow-right"></i>
+                            `;
+
+                    }
+
+                }
 
             }
         );
@@ -344,14 +596,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (backToTop) {
 
-        backToTop.addEventListener("click", () => {
+        backToTop.addEventListener(
+            "click",
+            () => {
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
 
-        });
+            }
+        );
 
     }
 
@@ -359,82 +614,134 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ================= SMOOTH ANCHOR LINKS ================= */
 
     document
-        .querySelectorAll('a[href^="#"]')
+        .querySelectorAll(
+            'a[href^="#"]'
+        )
         .forEach((link) => {
 
-            link.addEventListener("click", (event) => {
+            link.addEventListener(
+                "click",
+                (event) => {
 
-                const targetId =
-                    link.getAttribute("href");
+                    const targetId =
+                        link.getAttribute(
+                            "href"
+                        );
 
-                if (
-                    !targetId ||
-                    targetId === "#"
-                ) {
-                    return;
+
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+
+                    if (!target) {
+
+                        return;
+
+                    }
+
+
+                    event.preventDefault();
+
+
+                    const headerHeight =
+                        header
+                            ? header.offsetHeight
+                            : 0;
+
+
+                    const targetPosition =
+                        target
+                            .getBoundingClientRect()
+                            .top +
+                        window.pageYOffset -
+                        headerHeight;
+
+
+                    window.scrollTo({
+
+                        top: targetPosition,
+
+                        behavior: "smooth"
+
+                    });
+
                 }
-
-                const target =
-                    document.querySelector(targetId);
-
-                if (!target) {
-                    return;
-                }
-
-                event.preventDefault();
-
-                const headerHeight =
-                    header
-                        ? header.offsetHeight
-                        : 0;
-
-                const targetPosition =
-                    target.getBoundingClientRect().top +
-                    window.pageYOffset -
-                    headerHeight;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: "smooth"
-                });
-
-            });
+            );
 
         });
 
 
     /* ================= ESCAPE KEY ================= */
 
-    document.addEventListener("keydown", (event) => {
+    document.addEventListener(
+        "keydown",
+        (event) => {
 
-        if (event.key !== "Escape") {
-            return;
-        }
+            if (
+                event.key !==
+                "Escape"
+            ) {
 
-        if (
-            navWrapper &&
-            navWrapper.classList.contains("open")
-        ) {
+                return;
 
-            navWrapper.classList.remove("open");
+            }
 
-            if (mobileMenuBtn) {
-                mobileMenuBtn.setAttribute(
-                    "aria-expanded",
-                    "false"
+
+            if (
+                navWrapper &&
+                navWrapper.classList.contains(
+                    "open"
+                )
+            ) {
+
+                navWrapper.classList.remove(
+                    "open"
                 );
 
-                const icon =
-                    mobileMenuBtn.querySelector("i");
 
-                if (icon) {
-                    icon.classList.remove("fa-xmark");
-                    icon.classList.add("fa-bars");
+                if (mobileMenuBtn) {
+
+                    mobileMenuBtn.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+
+                    const icon =
+                        mobileMenuBtn.querySelector(
+                            "i"
+                        );
+
+
+                    if (icon) {
+
+                        icon.classList.remove(
+                            "fa-xmark"
+                        );
+
+                        icon.classList.add(
+                            "fa-bars"
+                        );
+
+                    }
+
                 }
+
             }
 
         }
-
-    });
+    );
 
 });
