@@ -2620,6 +2620,19 @@ footer .logo-text span {
     opacity: 1;
 
     transform: none;
-  }
+  }/* WHY JOIN & COMING SOON */
+
+.why-join-section,
+.coming-soon-section{
+    background:#fff;
+}
+
+.coming-soon-section .objective-item{
+    transition:.3s ease;
+}
+
+.coming-soon-section .objective-item:hover{
+    transform:translateY(-5px);
+}
 
 }
