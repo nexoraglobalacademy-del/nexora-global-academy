@@ -1,1067 +1,219 @@
-/* =========================================================
-   NEXORA GLOBAL ACADEMY
-   Main JavaScript
-   Version 2.0
-   ========================================================= */
+/* ==========================================
+   NEXORA GLOBAL ACADEMY V2
+========================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+// Mobile Navigation
 
-  "use strict";
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
 
-
-  /* =======================================================
-     1. ELEMENTS
-     ======================================================= */
-
-  const body = document.body;
-
-  const header = document.querySelector("#header");
-
-  const menuToggle =
-    document.querySelector(".menu-toggle");
-
-  const nav =
-    document.querySelector("#main-navigation");
-
-  const navLinks =
-    document.querySelectorAll("#main-navigation a");
-
-  const sections =
-    document.querySelectorAll("main section[id]");
-
-  const backToTop =
-    document.querySelector("#back-to-top");
-
-
-  /* =======================================================
-     2. MOBILE NAVIGATION
-     ======================================================= */
-
-  const closeMobileMenu = () => {
-
-    if (!nav || !menuToggle) return;
-
-    nav.classList.remove("open");
-
-    menuToggle.classList.remove("active");
-
-    menuToggle.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-
-    body.classList.remove("menu-open");
-
-  };
-
-
-  const openMobileMenu = () => {
-
-    if (!nav || !menuToggle) return;
-
-    nav.classList.add("open");
-
-    menuToggle.classList.add("active");
-
-    menuToggle.setAttribute(
-      "aria-expanded",
-      "true"
-    );
-
-    body.classList.add("menu-open");
-
-  };
-
-
-  if (menuToggle && nav) {
-
-    menuToggle.addEventListener("click", event => {
-
-      event.stopPropagation();
-
-      const isOpen =
-        nav.classList.contains("open");
-
-      if (isOpen) {
-
-        closeMobileMenu();
-
-      } else {
-
-        openMobileMenu();
-
-      }
-
-    });
-
-
-    navLinks.forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        closeMobileMenu();
-
-      });
-
-    });
-
-
-    document.addEventListener("click", event => {
-
-      if (!nav.classList.contains("open")) {
-        return;
-      }
-
-      if (
-        !nav.contains(event.target) &&
-        !menuToggle.contains(event.target)
-      ) {
-
-        closeMobileMenu();
-
-      }
-
-    });
-
-
-    document.addEventListener("keydown", event => {
-
-      if (event.key === "Escape") {
-
-        closeMobileMenu();
-
-        menuToggle.focus();
-
-      }
-
-    });
-
-  }
-
-
-  /* =======================================================
-     3. ACTIVE NAVIGATION LINK
-     ======================================================= */
-
-  const updateActiveNav = () => {
-
-    if (!sections.length || !navLinks.length) {
-      return;
-    }
-
-    const scrollPosition =
-      window.scrollY + 180;
-
-    let currentSection = "";
-
-    sections.forEach(section => {
-
-      const sectionTop =
-        section.offsetTop;
-
-      const sectionHeight =
-        section.offsetHeight;
-
-      if (
-        scrollPosition >= sectionTop &&
-        scrollPosition <
-          sectionTop + sectionHeight
-      ) {
-
-        currentSection =
-          section.getAttribute("id");
-
-      }
-
-    });
-
-
-    navLinks.forEach(link => {
-
-      const href =
-        link.getAttribute("href");
-
-      const isActive =
-        href === `#${currentSection}`;
-
-      link.classList.toggle(
-        "active",
-        isActive
-      );
-
-    });
-
-  };
-
-
-  window.addEventListener(
-    "scroll",
-    updateActiveNav,
-    { passive: true }
-  );
-
-  window.addEventListener(
-    "resize",
-    updateActiveNav
-  );
-
-  updateActiveNav();
-
-
-  /* =======================================================
-     4. HEADER SCROLL EFFECT
-     ======================================================= */
-
-  const updateHeader = () => {
-
-    if (!header) return;
-
-    header.classList.toggle(
-      "scrolled",
-      window.scrollY > 20
-    );
-
-  };
-
-
-  window.addEventListener(
-    "scroll",
-    updateHeader,
-    { passive: true }
-  );
-
-  updateHeader();
-
-
-  /* =======================================================
-     5. BACK TO TOP
-     ======================================================= */
-
-  if (backToTop) {
-
-    const updateBackToTop = () => {
-
-      backToTop.classList.toggle(
-        "show",
-        window.scrollY > 500
-      );
-
-    };
-
-
-    window.addEventListener(
-      "scroll",
-      updateBackToTop,
-      { passive: true }
-    );
-
-    updateBackToTop();
-
-
-    backToTop.addEventListener(
-      "click",
-      () => {
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     6. FAQ ACCORDION
-     ======================================================= */
-
-  const faqQuestions =
-    document.querySelectorAll(
-      ".faq-question"
-    );
-
-
-  const closeFaq = question => {
-
-    const answer =
-      question.nextElementSibling;
-
-    question.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-
-    if (answer) {
-
-      answer.style.maxHeight = null;
-
-    }
-
-  };
-
-
-  const openFaq = question => {
-
-    const answer =
-      question.nextElementSibling;
-
-    question.setAttribute(
-      "aria-expanded",
-      "true"
-    );
-
-    if (answer) {
-
-      answer.style.maxHeight =
-        `${answer.scrollHeight}px`;
-
-    }
-
-  };
-
-
-  faqQuestions.forEach(question => {
-
-    question.addEventListener(
-      "click",
-      () => {
-
-        const isExpanded =
-          question.getAttribute(
-            "aria-expanded"
-          ) === "true";
-
-
-        faqQuestions.forEach(
-          otherQuestion => {
-
-            if (
-              otherQuestion !== question
-            ) {
-
-              closeFaq(otherQuestion);
-
-            }
-
-          }
-        );
-
-
-        if (isExpanded) {
-
-          closeFaq(question);
-
-        } else {
-
-          openFaq(question);
-
-        }
-
-      }
-    );
-
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
   });
+}
 
+// Close mobile menu when link clicked
 
-  /* Recalculate open FAQ height on resize */
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks?.classList.remove("active");
+  });
+});
 
-  window.addEventListener(
-    "resize",
-    () => {
+// Smooth Scroll
 
-      faqQuestions.forEach(question => {
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function (e) {
 
-        const isExpanded =
-          question.getAttribute(
-            "aria-expanded"
-          ) === "true";
+    const target = document.querySelector(
+      this.getAttribute("href")
+    );
 
-        const answer =
-          question.nextElementSibling;
+    if (target) {
+      e.preventDefault();
 
-        if (
-          isExpanded &&
-          answer
-        ) {
+      target.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  });
+});
 
-          answer.style.maxHeight =
-            `${answer.scrollHeight}px`;
+// Reveal Animation
+
+const revealElements =
+  document.querySelectorAll(
+    ".reveal, .card, .school-card"
+  );
+
+const revealObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.style.opacity = "1";
+          entry.target.style.transform =
+            "translateY(0)";
 
         }
 
       });
 
+    },
+    {
+      threshold: 0.15
     }
   );
 
+revealElements.forEach(element => {
 
-  /* =======================================================
-     7. SCROLL REVEAL
-     ======================================================= */
+  element.style.opacity = "0";
+  element.style.transform =
+    "translateY(30px)";
 
-  const revealElements =
-    document.querySelectorAll(".reveal");
+  element.style.transition =
+    "all 0.7s ease";
 
+  revealObserver.observe(element);
 
-  if (
-    "IntersectionObserver" in window &&
-    revealElements.length
-  ) {
+});
 
-    const revealObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
+// Scroll To Top Button
 
-          entries.forEach(entry => {
+const scrollTopButton =
+  document.getElementById("scrollTop");
 
-            if (!entry.isIntersecting) {
-              return;
-            }
+if (scrollTopButton) {
 
-            entry.target.classList.add(
-              "visible"
-            );
+  window.addEventListener("scroll", () => {
 
-            observer.unobserve(
-              entry.target
-            );
+    if (window.scrollY > 500) {
 
-          });
-
-        },
-        {
-          threshold: 0.12,
-          rootMargin: "0px 0px -40px 0px"
-        }
-      );
-
-
-    revealElements.forEach(element => {
-
-      revealObserver.observe(element);
-
-    });
-
-  } else {
-
-    revealElements.forEach(element => {
-
-      element.classList.add("visible");
-
-    });
-
-  }
-
-
-  /* =======================================================
-     8. SMOOTH SCROLL
-     ======================================================= */
-
-  const anchorLinks =
-    document.querySelectorAll(
-      'a[href^="#"]'
-    );
-
-
-  anchorLinks.forEach(link => {
-
-    link.addEventListener(
-      "click",
-      event => {
-
-        const targetId =
-          link.getAttribute("href");
-
-
-        if (
-          !targetId ||
-          targetId === "#"
-        ) {
-
-          return;
-
-        }
-
-
-        let target = null;
-
-        try {
-
-          target =
-            document.querySelector(
-              targetId
-            );
-
-        } catch (error) {
-
-          return;
-
-        }
-
-
-        if (!target) {
-          return;
-        }
-
-
-        event.preventDefault();
-
-
-        const headerHeight =
-          header
-            ? header.offsetHeight
-            : 0;
-
-
-        const targetPosition =
-          target.getBoundingClientRect().top +
-          window.scrollY -
-          headerHeight;
-
-
-        window.scrollTo({
-
-          top:
-            Math.max(
-              targetPosition,
-              0
-            ),
-
-          behavior: "smooth"
-
-        });
-
-
-        /* Update URL without jumping */
-
-        if (
-          window.history &&
-          window.history.pushState
-        ) {
-
-          window.history.pushState(
-            null,
-            "",
-            targetId
-          );
-
-        }
-
-      }
-    );
-
-  });
-
-
-  /* =======================================================
-     9. MEMBERSHIP FORM
-     ======================================================= */
-
-  const membershipForm =
-    document.querySelector(
-      "#membership-form"
-    );
-
-  const membershipStatus =
-    document.querySelector(
-      "#membership-status"
-    );
-
-
-  const setFormStatus = (
-    element,
-    message,
-    type
-  ) => {
-
-    if (!element) return;
-
-    element.textContent =
-      message;
-
-    element.className =
-      `form-status ${type}`;
-
-  };
-
-
-  const setButtonLoading = (
-    button,
-    loading,
-    originalText
-  ) => {
-
-    if (!button) return;
-
-    if (loading) {
-
-      button.disabled = true;
-
-      button.dataset.originalText =
-        originalText ||
-        button.textContent.trim();
-
-      button.innerHTML =
-        `Processing... <i class="fa-solid fa-spinner fa-spin"></i>`;
+      scrollTopButton.style.display =
+        "flex";
 
     } else {
 
-      button.disabled = false;
-
-      button.innerHTML =
-        button.dataset.originalText ||
-        originalText ||
-        "Submit";
+      scrollTopButton.style.display =
+        "none";
 
     }
 
-  };
-
-
-  if (membershipForm) {
-
-    membershipForm.addEventListener(
-      "submit",
-      event => {
-
-        event.preventDefault();
-
-
-        if (
-          !membershipForm.checkValidity()
-        ) {
-
-          membershipForm.reportValidity();
-
-          setFormStatus(
-            membershipStatus,
-            "Please complete all required fields.",
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        const formData =
-          new FormData(
-            membershipForm
-          );
-
-
-        const name =
-          String(
-            formData.get("name") || ""
-          ).trim();
-
-        const email =
-          String(
-            formData.get("email") || ""
-          ).trim();
-
-        const phone =
-          String(
-            formData.get("phone") || ""
-          ).trim();
-
-        const country =
-          String(
-            formData.get("country") || ""
-          ).trim();
-
-        const interest =
-          String(
-            formData.get("interest") || ""
-          ).trim();
-
-        const message =
-          String(
-            formData.get("message") || ""
-          ).trim();
-
-
-        if (
-          !name ||
-          !email ||
-          !phone ||
-          !country ||
-          !interest ||
-          !message
-        ) {
-
-          setFormStatus(
-            membershipStatus,
-            "Please complete all required fields.",
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        const submitButton =
-          membershipForm.querySelector(
-            'button[type="submit"]'
-          );
-
-
-        const whatsappMessage =
-          `NEXORA GLOBAL ACADEMY MEMBERSHIP APPLICATION\n\n` +
-          `Full Name: ${name}\n` +
-          `Email: ${email}\n` +
-          `WhatsApp Number: ${phone}\n` +
-          `Country: ${country}\n` +
-          `Area of Interest: ${interest}\n` +
-          `Why I want to join: ${message}`;
-
-
-        const whatsappNumber =
-          "2348167193341";
-
-
-        const whatsappURL =
-          `https://wa.me/${whatsappNumber}?text=` +
-          encodeURIComponent(
-            whatsappMessage
-          );
-
-
-        setFormStatus(
-          membershipStatus,
-          "Your application is ready. Opening WhatsApp...",
-          "success"
-        );
-
-
-        setButtonLoading(
-          submitButton,
-          true,
-          "Submit Interest"
-        );
-
-
-        setTimeout(() => {
-
-          window.open(
-            whatsappURL,
-            "_blank",
-            "noopener,noreferrer"
-          );
-
-
-          setButtonLoading(
-            submitButton,
-            false,
-            "Submit Interest"
-          );
-
-        }, 600);
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     10. CONTACT FORM
-     ======================================================= */
-
-  const contactForm =
-    document.querySelector(
-      "#contact-form"
-    );
-
-  const contactStatus =
-    document.querySelector(
-      "#contact-status"
-    );
-
-
-  if (contactForm) {
-
-    contactForm.addEventListener(
-      "submit",
-      event => {
-
-        event.preventDefault();
-
-
-        if (
-          !contactForm.checkValidity()
-        ) {
-
-          contactForm.reportValidity();
-
-          setFormStatus(
-            contactStatus,
-            "Please complete all required fields.",
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        const formData =
-          new FormData(
-            contactForm
-          );
-
-
-        const name =
-          String(
-            formData.get("name") || ""
-          ).trim();
-
-        const email =
-          String(
-            formData.get("email") || ""
-          ).trim();
-
-        const subject =
-          String(
-            formData.get("subject") || ""
-          ).trim();
-
-        const message =
-          String(
-            formData.get("message") || ""
-          ).trim();
-
-
-        if (
-          !name ||
-          !email ||
-          !subject ||
-          !message
-        ) {
-
-          setFormStatus(
-            contactStatus,
-            "Please complete all required fields.",
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        const emailAddress =
-          "nexoraglobalacademy@gmail.com";
-
-
-        const emailSubject =
-          `Nexora Website: ${subject}`;
-
-
-        const emailBody =
-          `Name: ${name}\n` +
-          `Email: ${email}\n\n` +
-          `Message:\n${message}`;
-
-
-        const mailtoURL =
-          `mailto:${emailAddress}` +
-          `?subject=${encodeURIComponent(
-            emailSubject
-          )}` +
-          `&body=${encodeURIComponent(
-            emailBody
-          )}`;
-
-
-        setFormStatus(
-          contactStatus,
-          "Opening your email application...",
-          "success"
-        );
-
-
-        const submitButton =
-          contactForm.querySelector(
-            'button[type="submit"]'
-          );
-
-
-        setButtonLoading(
-          submitButton,
-          true,
-          "Send Message"
-        );
-
-
-        setTimeout(() => {
-
-          window.location.href =
-            mailtoURL;
-
-          setButtonLoading(
-            submitButton,
-            false,
-            "Send Message"
-          );
-
-        }, 400);
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     11. WHATSAPP DATA LINKS
-     ======================================================= */
-
-  const whatsappLinks =
-    document.querySelectorAll(
-      "[data-whatsapp]"
-    );
-
-
-  whatsappLinks.forEach(link => {
-
-    link.addEventListener(
-      "click",
-      () => {
-
-        const message =
-          link.getAttribute(
-            "data-whatsapp"
-          );
-
-
-        if (!message) {
-          return;
-        }
-
-
-        const number =
-          "2348167193341";
-
-
-        link.href =
-          `https://wa.me/${number}?text=` +
-          encodeURIComponent(
-            message
-          );
-
-      }
-    );
-
   });
 
-
-  /* =======================================================
-     12. CURRENT YEAR
-     ======================================================= */
-
-  const yearElements =
-    document.querySelectorAll(
-      "[data-current-year]"
-    );
-
-
-  yearElements.forEach(element => {
-
-    element.textContent =
-      new Date().getFullYear();
-
-  });
-
-
-  /* =======================================================
-     13. IMAGE ERROR HANDLING
-     ======================================================= */
-
-  const images =
-    document.querySelectorAll("img");
-
-
-  images.forEach(image => {
-
-    image.addEventListener(
-      "error",
-      () => {
-
-        image.classList.add(
-          "image-error"
-        );
-
-        image.setAttribute(
-          "aria-hidden",
-          "true"
-        );
-
-      }
-    );
-
-
-    image.addEventListener(
-      "load",
-      () => {
-
-        image.classList.remove(
-          "image-error"
-        );
-
-      }
-    );
-
-  });
-
-
-  /* =======================================================
-     14. REDUCE MOTION SUPPORT
-     ======================================================= */
-
-  const prefersReducedMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    );
-
-
-  if (prefersReducedMotion.matches) {
-
-    document.documentElement.style
-      .scrollBehavior = "auto";
-
-  }
-
-
-  /* =======================================================
-     15. CLOSE MENU ON RESIZE
-     ======================================================= */
-
-  window.addEventListener(
-    "resize",
+  scrollTopButton.addEventListener(
+    "click",
     () => {
 
-      if (
-        window.innerWidth > 900
-      ) {
-
-        closeMobileMenu();
-
-      }
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
     }
   );
 
+}
 
-  /* =======================================================
-     16. CONSOLE MESSAGE
-     ======================================================= */
+// Dynamic Year
 
-  console.log(
-    "Nexora Global Academy website loaded successfully."
+const yearElement =
+  document.getElementById("year");
+
+if (yearElement) {
+
+  yearElement.textContent =
+    new Date().getFullYear();
+
+}
+
+// Membership Form
+
+const membershipForm =
+  document.getElementById(
+    "membershipForm"
   );
 
-});
+if (membershipForm) {
+
+  membershipForm.addEventListener(
+    "submit",
+    function (e) {
+
+      e.preventDefault();
+
+      alert(
+        "Thank you for your interest in Nexora Global Academy. We will contact you soon."
+      );
+
+      membershipForm.reset();
+
+    }
+  );
+
+}
+
+// Contact Form
+
+const contactForm =
+  document.getElementById(
+    "contactForm"
+  );
+
+if (contactForm) {
+
+  contactForm.addEventListener(
+    "submit",
+    function (e) {
+
+      e.preventDefault();
+
+      alert(
+        "Message sent successfully."
+      );
+
+      contactForm.reset();
+
+    }
+  );
+
+}
+
+// Navbar Shadow
+
+const header =
+  document.querySelector("header");
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (window.scrollY > 30) {
+
+      header.style.boxShadow =
+        "0 8px 20px rgba(0,0,0,.08)";
+
+    } else {
+
+      header.style.boxShadow =
+        "none";
+
+    }
+
+  }
+);
+
+// Console Branding
+
+console.log(
+  "%cNEXORA GLOBAL ACADEMY",
+  "color:#1f6b57;font-size:20px;font-weight:bold;"
+);
+
+console.log(
+  "Empowering Minds, Transforming Futures"
+);
