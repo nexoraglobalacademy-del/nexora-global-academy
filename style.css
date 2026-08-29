@@ -1,7 +1,7 @@
 /* =========================================================
    NEXORA GLOBAL ACADEMY
    Main Stylesheet
-   Version 1.0
+   Version 2.0 — Production Ready
    ========================================================= */
 
 
@@ -29,6 +29,9 @@
 
   --border: #dfe9e5;
 
+  --danger: #b42318;
+  --success: #087443;
+
   --shadow-sm: 0 8px 25px rgba(16, 35, 31, 0.07);
   --shadow-md: 0 15px 45px rgba(16, 35, 31, 0.10);
   --shadow-lg: 0 25px 70px rgba(16, 35, 31, 0.14);
@@ -40,6 +43,8 @@
 
   --container: 1180px;
 
+  --header-height: 82px;
+
   --transition: 0.3s ease;
 }
 
@@ -48,7 +53,9 @@
    2. RESET
    ========================================================= */
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -65,6 +72,8 @@ body {
   background: var(--white);
   line-height: 1.7;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body.menu-open {
@@ -73,6 +82,7 @@ body.menu-open {
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -92,13 +102,52 @@ button {
   cursor: pointer;
 }
 
-ul {
+ul,
+ol {
   list-style: none;
+}
+
+textarea {
+  min-height: 120px;
+}
+
+::placeholder {
+  color: #94a39f;
+  opacity: 1;
 }
 
 
 /* =========================================================
-   3. GLOBAL
+   3. ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+  outline: 3px solid rgba(212, 168, 79, 0.65);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+/* =========================================================
+   4. GLOBAL
    ========================================================= */
 
 .container {
@@ -113,9 +162,12 @@ ul {
 .section-label {
   display: inline-block;
   margin-bottom: 14px;
+
   color: var(--primary);
+
   font-size: 0.78rem;
   font-weight: 800;
+
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -131,15 +183,19 @@ ul {
 .why-content h2,
 .objectives-content h2 {
   color: var(--dark);
+
   font-size: clamp(2rem, 4vw, 3.3rem);
   line-height: 1.18;
+
   margin-bottom: 20px;
+
   font-weight: 800;
 }
 
 .section-heading p {
   max-width: 650px;
   margin: auto;
+
   color: var(--text-light);
 }
 
@@ -148,9 +204,13 @@ ul {
   color: var(--dark-soft);
 }
 
+.text-center {
+  text-align: center;
+}
+
 
 /* =========================================================
-   4. BUTTONS
+   5. BUTTONS
    ========================================================= */
 
 .btn-primary,
@@ -171,24 +231,34 @@ ul {
   transition:
     transform var(--transition),
     box-shadow var(--transition),
-    background var(--transition);
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition);
 }
 
 .btn-primary {
   color: var(--white);
   background: var(--primary);
+
+  border: 1px solid var(--primary);
+
   box-shadow: 0 10px 25px rgba(11, 93, 75, 0.18);
 }
 
 .btn-primary:hover {
+  color: var(--white);
   background: var(--primary-dark);
+  border-color: var(--primary-dark);
+
   transform: translateY(-3px);
+
   box-shadow: 0 15px 30px rgba(11, 93, 75, 0.25);
 }
 
 .btn-secondary {
   color: var(--primary);
   background: var(--white);
+
   border: 1px solid var(--border);
 }
 
@@ -196,19 +266,25 @@ ul {
   color: var(--white);
   background: var(--primary);
   border-color: var(--primary);
+
   transform: translateY(-3px);
+
+  box-shadow: var(--shadow-sm);
 }
 
 
 /* =========================================================
-   5. ANNOUNCEMENT BAR
+   6. ANNOUNCEMENT BAR
    ========================================================= */
 
 .announcement-bar {
   background: var(--primary-dark);
   color: var(--white);
+
   text-align: center;
+
   font-size: 0.78rem;
+
   padding: 8px 0;
 }
 
@@ -216,7 +292,10 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+
   gap: 8px;
+
+  padding: 0 10px;
 }
 
 .announcement-bar i {
@@ -225,7 +304,7 @@ ul {
 
 
 /* =========================================================
-   6. HEADER
+   7. HEADER
    ========================================================= */
 
 #header {
@@ -234,66 +313,85 @@ ul {
   z-index: 1000;
 
   background: rgba(255, 255, 255, 0.96);
+
   border-bottom: 1px solid rgba(223, 233, 229, 0.7);
 
   backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
 .navbar {
-  min-height: 82px;
+  min-height: var(--header-height);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 25px;
 }
 
 
-/* Logo */
+/* =========================================================
+   8. LOGO
+   ========================================================= */
 
 .logo {
   display: inline-flex;
   align-items: center;
+
   gap: 11px;
+
   flex-shrink: 0;
 }
 
 .logo img {
   width: 48px;
   height: 48px;
+
   object-fit: contain;
 }
 
 .logo-text {
   display: flex;
   flex-direction: column;
+
   line-height: 1.1;
 }
 
 .logo-text strong {
   color: var(--primary);
+
   font-size: 1.15rem;
+  font-weight: 800;
+
   letter-spacing: 1px;
 }
 
 .logo-text span {
   color: var(--dark-soft);
+
   font-size: 0.53rem;
   font-weight: 700;
+
   letter-spacing: 1.3px;
 }
 
 
-/* Navigation */
+/* =========================================================
+   9. NAVIGATION
+   ========================================================= */
 
 nav ul {
   display: flex;
   align-items: center;
+
   gap: 23px;
 }
 
 nav a {
   position: relative;
+
+  display: inline-block;
 
   color: var(--dark-soft);
 
@@ -309,6 +407,7 @@ nav a::after {
   content: "";
 
   position: absolute;
+
   left: 0;
   bottom: 2px;
 
@@ -331,7 +430,9 @@ nav a.active::after {
 }
 
 
-/* Menu toggle */
+/* =========================================================
+   10. MOBILE MENU TOGGLE
+   ========================================================= */
 
 .menu-toggle {
   display: none;
@@ -357,16 +458,19 @@ nav a.active::after {
 
   background: var(--primary);
 
-  transition: transform var(--transition), opacity var(--transition);
+  transition:
+    transform var(--transition),
+    opacity var(--transition);
 }
 
 
 /* =========================================================
-   7. HERO
+   11. HERO
    ========================================================= */
 
 .hero {
   position: relative;
+
   min-height: 720px;
 
   display: flex;
@@ -391,7 +495,9 @@ nav a.active::after {
   min-height: 650px;
 
   display: grid;
+
   grid-template-columns: 1.05fr 0.95fr;
+
   align-items: center;
 
   gap: 65px;
@@ -413,6 +519,8 @@ nav a.active::after {
   font-weight: 800;
 
   letter-spacing: 2.2px;
+
+  text-transform: uppercase;
 }
 
 .hero h1 {
@@ -421,6 +529,7 @@ nav a.active::after {
   color: var(--dark);
 
   font-size: clamp(2.8rem, 5vw, 5rem);
+
   line-height: 1.04;
 
   font-weight: 800;
@@ -432,6 +541,7 @@ nav a.active::after {
 
 .hero h1 span {
   display: block;
+
   color: var(--primary);
 }
 
@@ -448,12 +558,14 @@ nav a.active::after {
 .hero-buttons {
   display: flex;
   flex-wrap: wrap;
+
   gap: 13px;
 }
 
 .hero-trust {
   display: flex;
   align-items: center;
+
   gap: 8px;
 
   margin-top: 24px;
@@ -468,7 +580,9 @@ nav a.active::after {
 }
 
 
-/* Hero visual */
+/* =========================================================
+   12. HERO VISUAL
+   ========================================================= */
 
 .hero-visual {
   position: relative;
@@ -499,6 +613,7 @@ nav a.active::after {
   box-shadow: var(--shadow-lg);
 
   backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
 .hero-card-main img {
@@ -542,7 +657,9 @@ nav a.active::after {
 }
 
 
-/* Floating cards */
+/* =========================================================
+   13. FLOATING CARDS
+   ========================================================= */
 
 .floating-card {
   position: absolute;
@@ -550,6 +667,7 @@ nav a.active::after {
 
   display: flex;
   align-items: center;
+
   gap: 12px;
 
   padding: 14px 18px;
@@ -587,6 +705,7 @@ nav a.active::after {
   border-radius: 10px;
 
   color: var(--primary);
+
   background: var(--primary-light);
 }
 
@@ -597,11 +716,13 @@ nav a.active::after {
 
 .floating-card strong {
   color: var(--dark);
+
   font-size: 0.72rem;
 }
 
 .floating-card span {
   color: var(--text-light);
+
   font-size: 0.6rem;
 }
 
@@ -617,7 +738,9 @@ nav a.active::after {
 }
 
 
-/* Hero shapes */
+/* =========================================================
+   14. HERO DECORATIVE SHAPES
+   ========================================================= */
 
 .hero-shape {
   position: absolute;
@@ -649,7 +772,7 @@ nav a.active::after {
 
 
 /* =========================================================
-   8. ABOUT
+   15. ABOUT
    ========================================================= */
 
 .about-section {
@@ -658,6 +781,7 @@ nav a.active::after {
 
 .about-grid {
   display: grid;
+
   grid-template-columns: 1.1fr 0.9fr;
 
   align-items: center;
@@ -672,6 +796,11 @@ nav a.active::after {
 .about-content h2 {
   margin-bottom: 22px;
 }
+
+
+/* =========================================================
+   16. MISSION CARD
+   ========================================================= */
 
 .mission-card {
   position: relative;
@@ -715,6 +844,7 @@ nav a.active::after {
   margin-bottom: 25px;
 
   color: var(--primary);
+
   background: var(--white);
 
   border-radius: 16px;
@@ -737,6 +867,7 @@ nav a.active::after {
   color: var(--white);
 
   font-size: 1.8rem;
+
   line-height: 1.25;
 }
 
@@ -751,7 +882,7 @@ nav a.active::after {
 
 
 /* =========================================================
-   9. VISION
+   17. VISION
    ========================================================= */
 
 .vision-section {
@@ -814,7 +945,7 @@ nav a.active::after {
 
 
 /* =========================================================
-   10. PROGRAMMES
+   18. PROGRAMMES
    ========================================================= */
 
 .programmes-section {
@@ -831,6 +962,9 @@ nav a.active::after {
 
 .programme-card {
   position: relative;
+
+  display: flex;
+  flex-direction: column;
 
   padding: 32px 28px;
 
@@ -909,7 +1043,10 @@ nav a.active::after {
 .programme-card a {
   display: inline-flex;
   align-items: center;
+
   gap: 8px;
+
+  margin-top: auto;
 
   color: var(--primary);
 
@@ -927,7 +1064,7 @@ nav a.active::after {
 
 
 /* =========================================================
-   11. WHY NEXORA
+   19. WHY NEXORA
    ========================================================= */
 
 .why-section {
@@ -936,6 +1073,7 @@ nav a.active::after {
 
 .why-grid {
   display: grid;
+
   grid-template-columns: 0.85fr 1.15fr;
 
   gap: 80px;
@@ -945,6 +1083,7 @@ nav a.active::after {
 
 .why-content {
   position: sticky;
+
   top: 130px;
 }
 
@@ -966,6 +1105,7 @@ nav a.active::after {
 
 .benefit-item {
   display: flex;
+
   gap: 15px;
 
   padding: 23px;
@@ -976,11 +1116,15 @@ nav a.active::after {
 
   transition:
     transform var(--transition),
-    box-shadow var(--transition);
+    box-shadow var(--transition),
+    border-color var(--transition);
 }
 
 .benefit-item:hover {
   transform: translateY(-4px);
+
+  border-color: rgba(11, 93, 75, 0.14);
+
   box-shadow: var(--shadow-sm);
 }
 
@@ -1016,7 +1160,7 @@ nav a.active::after {
 
 
 /* =========================================================
-   12. PROCESS
+   20. PROCESS
    ========================================================= */
 
 .process-section {
@@ -1026,7 +1170,11 @@ nav a.active::after {
 .process-grid {
   display: grid;
 
-  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  grid-template-columns:
+    1fr auto
+    1fr auto
+    1fr auto
+    1fr;
 
   align-items: center;
 
@@ -1080,7 +1228,7 @@ nav a.active::after {
 
 
 /* =========================================================
-   13. VALUES
+   21. VALUES
    ========================================================= */
 
 .values-section {
@@ -1114,6 +1262,8 @@ nav a.active::after {
 }
 
 .value-card > i {
+  display: inline-block;
+
   margin-bottom: 18px;
 
   color: var(--accent);
@@ -1137,7 +1287,7 @@ nav a.active::after {
 
 
 /* =========================================================
-   14. OBJECTIVES
+   22. OBJECTIVES
    ========================================================= */
 
 .objectives-section {
@@ -1169,6 +1319,7 @@ nav a.active::after {
 .objective-item {
   display: flex;
   align-items: flex-start;
+
   gap: 12px;
 
   padding: 17px;
@@ -1178,6 +1329,19 @@ nav a.active::after {
   border: 1px solid var(--border);
 
   border-radius: 11px;
+
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
+}
+
+.objective-item:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(11, 93, 75, 0.15);
+
+  box-shadow: var(--shadow-sm);
 }
 
 .objective-item span {
@@ -1196,43 +1360,76 @@ nav a.active::after {
 }
 
 
-/* =====================================================
-   FOUNDER SECTION
-   ===================================================== */
+/* =========================================================
+   23. WHY JOIN
+   ========================================================= */
+
+.why-join-section {
+  background: var(--white);
+}
+
+.why-join-section .benefit-item {
+  background: var(--off-white);
+}
+
+.why-join-section .benefit-item:hover {
+  background: var(--white);
+}
+
+
+/* =========================================================
+   24. FOUNDER SECTION
+   ========================================================= */
 
 .founder-section {
   position: relative;
+
   overflow: hidden;
+
   background: #f8fbfa;
 }
 
 .founder-grid {
   display: grid;
-  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+
+  grid-template-columns:
+    minmax(320px, 0.9fr)
+    minmax(0, 1.1fr);
+
   align-items: center;
+
   gap: 70px;
 }
 
 
-/* =====================================================
-   FOUNDER IMAGE
-   ===================================================== */
+/* =========================================================
+   25. FOUNDER IMAGE
+   ========================================================= */
 
 .founder-image {
   position: relative;
+
   width: 100%;
   max-width: 480px;
+
   margin: 0 auto;
 }
 
 .founder-image-frame {
   position: relative;
+
   width: 100%;
+
   aspect-ratio: 4 / 5;
+
   overflow: hidden;
+
   border-radius: 28px;
+
   background: #eaf3f0;
+
   border: 1px solid rgba(11, 93, 75, 0.12);
+
   box-shadow:
     0 25px 60px rgba(11, 93, 75, 0.14),
     0 8px 25px rgba(0, 0, 0, 0.06);
@@ -1240,43 +1437,58 @@ nav a.active::after {
 
 .founder-image-frame::before {
   content: "";
+
   position: absolute;
+
   inset: 14px;
+
   border: 1px solid rgba(255, 255, 255, 0.55);
+
   border-radius: 20px;
+
   z-index: 2;
+
   pointer-events: none;
 }
 
 .founder-image-frame img {
   display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
+
   object-position: center top;
 }
 
 
-/* =====================================================
-   FOUNDER DECORATIVE ELEMENT
-   ===================================================== */
+/* =========================================================
+   26. FOUNDER DECORATIVE ELEMENT
+   ========================================================= */
 
 .founder-image::after {
   content: "";
+
   position: absolute;
+
   width: 115px;
   height: 115px;
+
   right: -30px;
   bottom: -30px;
+
   border-radius: 50%;
+
   background: rgba(11, 93, 75, 0.08);
+
   z-index: -1;
 }
 
 
-/* =====================================================
-   FOUNDER CONTENT
-   ===================================================== */
+/* =========================================================
+   27. FOUNDER CONTENT
+   ========================================================= */
 
 .founder-content {
   max-width: 680px;
@@ -1284,10 +1496,17 @@ nav a.active::after {
 
 .founder-content h2 {
   margin-bottom: 22px;
+
+  color: var(--dark);
+
+  font-size: clamp(2rem, 4vw, 3.3rem);
+
+  line-height: 1.18;
 }
 
 .founder-content p {
   margin-bottom: 18px;
+
   line-height: 1.85;
 }
 
@@ -1296,204 +1515,130 @@ nav a.active::after {
 }
 
 
-/* =====================================================
-   FOUNDER HIGHLIGHTS
-   ===================================================== */
+/* =========================================================
+   28. FOUNDER HIGHLIGHTS
+   ========================================================= */
 
 .founder-highlights {
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
+
   gap: 14px;
+
   margin: 28px 0;
 }
 
 .founder-highlight {
   display: flex;
   align-items: flex-start;
+
   gap: 12px;
+
   padding: 18px 15px;
-  background: #ffffff;
+
+  background: var(--white);
+
   border: 1px solid rgba(11, 93, 75, 0.09);
+
   border-radius: 14px;
+
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
 }
 
 .founder-highlight:hover {
   transform: translateY(-4px);
+
   border-color: rgba(11, 93, 75, 0.2);
+
   box-shadow: 0 12px 30px rgba(11, 93, 75, 0.08);
 }
 
 .founder-highlight i {
   flex-shrink: 0;
+
   width: 38px;
   height: 38px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   border-radius: 10px;
+
   background: rgba(11, 93, 75, 0.08);
-  color: #0b5d4b;
+
+  color: var(--primary);
+
   font-size: 15px;
 }
 
 .founder-highlight div {
   display: flex;
   flex-direction: column;
+
   gap: 4px;
 }
 
 .founder-highlight strong {
+  color: #123b32;
+
   font-size: 14px;
   font-weight: 700;
-  color: #123b32;
 }
 
 .founder-highlight span {
-  font-size: 11px;
-  line-height: 1.5;
   color: #6b7d78;
+
+  font-size: 11px;
+
+  line-height: 1.5;
 }
 
 
-/* =====================================================
-   FOUNDER MOTTO
-   ===================================================== */
+/* =========================================================
+   29. FOUNDER MOTTO
+   ========================================================= */
 
 .founder-motto {
   display: flex;
   align-items: center;
+
   gap: 15px;
+
   padding: 20px 22px;
+
   margin-top: 25px;
-  border-left: 4px solid #0b5d4b;
+
+  border-left: 4px solid var(--primary);
+
   background: rgba(11, 93, 75, 0.055);
+
   border-radius: 0 14px 14px 0;
 }
 
 .founder-motto i {
   flex-shrink: 0;
-  color: #0b5d4b;
+
+  color: var(--primary);
+
   font-size: 20px;
 }
 
 .founder-motto strong {
   color: #123b32;
+
   font-size: 15px;
+
   line-height: 1.6;
 }
 
 
-/* =====================================================
-   FOUNDER RESPONSIVE — TABLET
-   ===================================================== */
-
-@media (max-width: 992px) {
-
-  .founder-grid {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
-
-  .founder-image {
-    max-width: 430px;
-  }
-
-  .founder-content {
-    max-width: 760px;
-    margin: 0 auto;
-  }
-
-  .founder-highlights {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-}
-
-
-/* =====================================================
-   FOUNDER RESPONSIVE — MOBILE
-   ===================================================== */
-
-@media (max-width: 768px) {
-
-  .founder-grid {
-    gap: 38px;
-  }
-
-  .founder-image {
-    max-width: 360px;
-  }
-
-  .founder-image-frame {
-    border-radius: 22px;
-  }
-
-  .founder-image-frame::before {
-    inset: 10px;
-    border-radius: 16px;
-  }
-
-  .founder-highlights {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .founder-highlight {
-    padding: 16px;
-  }
-
-  .founder-motto {
-    padding: 17px 18px;
-  }
-
-}
-
-
-/* =====================================================
-   FOUNDER RESPONSIVE — SMALL PHONES
-   ===================================================== */
-
-@media (max-width: 480px) {
-
-  .founder-image {
-    max-width: 100%;
-  }
-
-  .founder-image-frame {
-    border-radius: 18px;
-  }
-
-  .founder-image-frame::before {
-    inset: 8px;
-    border-radius: 13px;
-  }
-
-  .founder-content h2 {
-    font-size: 28px;
-  }
-
-  .founder-content p {
-    font-size: 14px;
-    line-height: 1.8;
-  }
-
-  .founder-motto {
-    gap: 11px;
-  }
-
-  .founder-motto strong {
-    font-size: 13px;
-  }
-
-}
-
-
 /* =========================================================
-   16. MEMBERSHIP
+   30. MEMBERSHIP
    ========================================================= */
 
 .membership-section {
@@ -1545,6 +1690,7 @@ nav a.active::after {
 
 .membership-points {
   display: grid;
+
   gap: 10px;
 
   margin-bottom: 30px;
@@ -1553,6 +1699,7 @@ nav a.active::after {
 .membership-points span {
   display: flex;
   align-items: center;
+
   gap: 10px;
 
   color: rgba(255, 255, 255, 0.9);
@@ -1567,6 +1714,7 @@ nav a.active::after {
 .whatsapp-large {
   display: inline-flex;
   align-items: center;
+
   gap: 10px;
 
   padding: 14px 21px;
@@ -1580,20 +1728,27 @@ nav a.active::after {
   font-size: 0.78rem;
   font-weight: 700;
 
-  transition: transform var(--transition);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
 .whatsapp-large:hover {
   transform: translateY(-3px);
+
+  box-shadow: var(--shadow-md);
 }
 
 .whatsapp-large i {
   color: #25d366;
+
   font-size: 1.2rem;
 }
 
 
-/* Membership form */
+/* =========================================================
+   31. MEMBERSHIP FORM CARD
+   ========================================================= */
 
 .membership-form-card {
   padding: 38px;
@@ -1623,7 +1778,7 @@ nav a.active::after {
 
 
 /* =========================================================
-   17. FORMS
+   32. FORMS
    ========================================================= */
 
 .form-group {
@@ -1662,7 +1817,8 @@ nav a.active::after {
 
   transition:
     border-color var(--transition),
-    box-shadow var(--transition);
+    box-shadow var(--transition),
+    background var(--transition);
 }
 
 .form-group input:focus,
@@ -1697,16 +1853,16 @@ nav a.active::after {
 }
 
 .form-status.success {
-  color: var(--primary);
+  color: var(--success);
 }
 
 .form-status.error {
-  color: #b42318;
+  color: var(--danger);
 }
 
 
 /* =========================================================
-   18. FAQ
+   33. FAQ
    ========================================================= */
 
 .faq-section {
@@ -1796,7 +1952,31 @@ nav a.active::after {
 
 
 /* =========================================================
-   19. CONTACT
+   34. COMING SOON
+   ========================================================= */
+
+.coming-soon-section {
+  background: var(--white);
+}
+
+.coming-soon-section .objective-item {
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
+}
+
+.coming-soon-section .objective-item:hover {
+  transform: translateY(-5px);
+
+  box-shadow: var(--shadow-sm);
+
+  border-color: rgba(11, 93, 75, 0.15);
+}
+
+
+/* =========================================================
+   35. CONTACT
    ========================================================= */
 
 .contact-section {
@@ -1871,7 +2051,9 @@ nav a.active::after {
 }
 
 
-/* Contact form */
+/* =========================================================
+   36. CONTACT FORM
+   ========================================================= */
 
 .contact-form-wrapper {
   display: grid;
@@ -1915,7 +2097,7 @@ nav a.active::after {
 
 
 /* =========================================================
-   20. FINAL CTA
+   37. FINAL CTA
    ========================================================= */
 
 .final-cta {
@@ -1958,7 +2140,7 @@ nav a.active::after {
 
 
 /* =========================================================
-   21. FOOTER
+   38. FOOTER
    ========================================================= */
 
 footer {
@@ -1972,7 +2154,11 @@ footer {
 .footer-grid {
   display: grid;
 
-  grid-template-columns: 1.5fr 0.8fr 0.9fr 1fr;
+  grid-template-columns:
+    1.5fr
+    0.8fr
+    0.9fr
+    1fr;
 
   gap: 45px;
 
@@ -1999,6 +2185,7 @@ footer .logo-text span {
 
 .social-links {
   display: flex;
+
   gap: 9px;
 }
 
@@ -2031,6 +2218,7 @@ footer .logo-text span {
 .footer-column {
   display: flex;
   flex-direction: column;
+
   gap: 9px;
 }
 
@@ -2059,6 +2247,7 @@ footer .logo-text span {
 .footer-bottom {
   display: flex;
   justify-content: space-between;
+
   gap: 20px;
 
   padding-top: 20px;
@@ -2068,7 +2257,7 @@ footer .logo-text span {
 
 
 /* =========================================================
-   22. FLOATING WHATSAPP
+   39. FLOATING WHATSAPP
    ========================================================= */
 
 .floating-whatsapp {
@@ -2081,6 +2270,7 @@ footer .logo-text span {
 
   display: flex;
   align-items: center;
+
   gap: 9px;
 
   padding: 12px 16px;
@@ -2091,7 +2281,8 @@ footer .logo-text span {
 
   border-radius: 50px;
 
-  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.25);
+  box-shadow:
+    0 10px 30px rgba(37, 211, 102, 0.25);
 
   font-size: 0.72rem;
   font-weight: 700;
@@ -2104,7 +2295,8 @@ footer .logo-text span {
 .floating-whatsapp:hover {
   transform: translateY(-4px);
 
-  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.35);
+  box-shadow:
+    0 15px 35px rgba(37, 211, 102, 0.35);
 }
 
 .floating-whatsapp i {
@@ -2113,7 +2305,7 @@ footer .logo-text span {
 
 
 /* =========================================================
-   23. BACK TO TOP
+   40. BACK TO TOP
    ========================================================= */
 
 #back-to-top {
@@ -2146,7 +2338,8 @@ footer .logo-text span {
   transition:
     opacity var(--transition),
     visibility var(--transition),
-    transform var(--transition);
+    transform var(--transition),
+    background var(--transition);
 }
 
 #back-to-top.show {
@@ -2162,7 +2355,7 @@ footer .logo-text span {
 
 
 /* =========================================================
-   24. SCROLL REVEAL
+   41. SCROLL REVEAL
    ========================================================= */
 
 .reveal {
@@ -2183,7 +2376,7 @@ footer .logo-text span {
 
 
 /* =========================================================
-   25. SELECTION
+   42. TEXT SELECTION
    ========================================================= */
 
 ::selection {
@@ -2194,7 +2387,7 @@ footer .logo-text span {
 
 
 /* =========================================================
-   26. SCROLLBAR
+   43. SCROLLBAR
    ========================================================= */
 
 ::-webkit-scrollbar {
@@ -2217,7 +2410,7 @@ footer .logo-text span {
 
 
 /* =========================================================
-   27. RESPONSIVE — TABLET
+   44. RESPONSIVE — LARGE TABLET
    ========================================================= */
 
 @media (max-width: 1050px) {
@@ -2250,14 +2443,86 @@ footer .logo-text span {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .about-grid,
+  .why-grid,
+  .objectives-grid,
+  .membership-grid {
+    gap: 50px;
+  }
 }
 
 
 /* =========================================================
-   28. RESPONSIVE — MOBILE NAVIGATION
+   45. RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+  .founder-grid {
+    grid-template-columns: 1fr;
+
+    gap: 50px;
+  }
+
+  .founder-image {
+    max-width: 430px;
+  }
+
+  .founder-content {
+    max-width: 760px;
+
+    margin: 0 auto;
+  }
+
+  .founder-highlights {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .about-grid,
+  .why-grid,
+  .objectives-grid,
+  .membership-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-content,
+  .why-content,
+  .objectives-content,
+  .membership-content {
+    max-width: 800px;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .why-content {
+    position: static;
+  }
+
+  .membership-content {
+    text-align: center;
+  }
+
+  .membership-content > p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .membership-points {
+    justify-items: center;
+  }
+}
+
+
+/* =========================================================
+   46. RESPONSIVE — MOBILE NAVIGATION
    ========================================================= */
 
 @media (max-width: 850px) {
+
+  :root {
+    --header-height: 72px;
+  }
 
   .navbar {
     min-height: 72px;
@@ -2278,9 +2543,12 @@ footer .logo-text span {
     left: 0;
 
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
 
-    padding: 105px 30px 40px;
+    padding:
+      calc(var(--header-height) + 30px)
+      30px
+      40px;
 
     background: var(--white);
 
@@ -2293,6 +2561,8 @@ footer .logo-text span {
       opacity var(--transition),
       visibility var(--transition),
       transform var(--transition);
+
+    overflow-y: auto;
   }
 
   nav.open {
@@ -2319,6 +2589,8 @@ footer .logo-text span {
   nav a {
     display: block;
 
+    width: 100%;
+
     padding: 13px;
 
     font-size: 1rem;
@@ -2329,11 +2601,6 @@ footer .logo-text span {
   }
 
   .hero-grid,
-  .about-grid,
-  .why-grid,
-  .objectives-grid,
-  .founder-grid,
-  .membership-grid,
   .contact-form-wrapper {
     grid-template-columns: 1fr;
   }
@@ -2367,10 +2634,6 @@ footer .logo-text span {
     min-height: 450px;
   }
 
-  .why-content {
-    position: static;
-  }
-
   .process-grid {
     grid-template-columns: repeat(2, 1fr);
 
@@ -2391,23 +2654,66 @@ footer .logo-text span {
     text-align: left;
   }
 
-  .membership-content {
-    text-align: center;
-  }
-
-  .membership-points {
-    justify-items: center;
-  }
-
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
 }
 
 
 /* =========================================================
-   29. RESPONSIVE — SMALL MOBILE
+   47. RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .section {
+    padding: 75px 0;
+  }
+
+  .founder-grid {
+    gap: 38px;
+  }
+
+  .founder-image {
+    max-width: 360px;
+  }
+
+  .founder-image-frame {
+    border-radius: 22px;
+  }
+
+  .founder-image-frame::before {
+    inset: 10px;
+
+    border-radius: 16px;
+  }
+
+  .founder-highlights {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .founder-highlight {
+    padding: 16px;
+  }
+
+  .founder-motto {
+    padding: 17px 18px;
+  }
+
+  .membership-section {
+    padding: 75px 0;
+  }
+
+  .contact-form-wrapper {
+    gap: 35px;
+  }
+}
+
+
+/* =========================================================
+   48. RESPONSIVE — SMALL MOBILE
    ========================================================= */
 
 @media (max-width: 600px) {
@@ -2494,11 +2800,13 @@ footer .logo-text span {
 
   .floating-card-one {
     top: 35px;
+
     left: 0;
   }
 
   .floating-card-two {
     right: 0;
+
     bottom: 30px;
   }
 
@@ -2594,45 +2902,91 @@ footer .logo-text span {
     right: 14px;
     bottom: 72px;
   }
-
 }
 
 
 /* =========================================================
-   30. ACCESSIBILITY
+   49. RESPONSIVE — EXTRA SMALL PHONES
    ========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 480px) {
 
-  html {
-    scroll-behavior: auto;
+  .hero h1 {
+    font-size: 2.3rem;
   }
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .hero-card-main {
+    width: 82%;
   }
 
-  .reveal {
-    opacity: 1;
+  .founder-image {
+    max-width: 100%;
+  }
 
-    transform: none;
-  }/* WHY JOIN & COMING SOON */
+  .founder-image-frame {
+    border-radius: 18px;
+  }
 
-.why-join-section,
-.coming-soon-section{
-    background:#fff;
+  .founder-image-frame::before {
+    inset: 8px;
+
+    border-radius: 13px;
+  }
+
+  .founder-content h2 {
+    font-size: 28px;
+  }
+
+  .founder-content p {
+    font-size: 14px;
+
+    line-height: 1.8;
+  }
+
+  .founder-motto {
+    gap: 11px;
+  }
+
+  .founder-motto strong {
+    font-size: 13px;
+  }
+
+  .membership-content h2 {
+    font-size: 2rem;
+  }
+
+  .contact-card {
+    padding: 22px 15px;
+  }
 }
 
-.coming-soon-section .objective-item{
-    transition:.3s ease;
-}
 
-.coming-soon-section .objective-item:hover{
-    transform:translateY(-5px);
-}
+/* =========================================================
+   50. PRINT
+   ========================================================= */
 
+@media print {
+
+  #header,
+  .announcement-bar,
+  .floating-whatsapp,
+  #back-to-top,
+  .menu-toggle,
+  .hero-buttons,
+  .social-links {
+    display: none !important;
+  }
+
+  body {
+    color: #000;
+    background: #fff;
+  }
+
+  .section {
+    padding: 40px 0;
+  }
+
+  a {
+    text-decoration: underline;
+  }
 }
