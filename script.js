@@ -1,68 +1,136 @@
 /* =========================================================
    NEXORA GLOBAL ACADEMY
    Main JavaScript
-   Version 1.0
+   Version 2.0
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  "use strict";
+
+
   /* =======================================================
-     1. MOBILE NAVIGATION
+     1. ELEMENTS
      ======================================================= */
 
-  const menuToggle = document.querySelector(".menu-toggle");
-  const nav = document.querySelector("nav");
-  const navLinks = document.querySelectorAll("nav a");
+  const body = document.body;
+
+  const header = document.querySelector("#header");
+
+  const menuToggle =
+    document.querySelector(".menu-toggle");
+
+  const nav =
+    document.querySelector("#main-navigation");
+
+  const navLinks =
+    document.querySelectorAll("#main-navigation a");
+
+  const sections =
+    document.querySelectorAll("main section[id]");
+
+  const backToTop =
+    document.querySelector("#back-to-top");
+
+
+  /* =======================================================
+     2. MOBILE NAVIGATION
+     ======================================================= */
+
+  const closeMobileMenu = () => {
+
+    if (!nav || !menuToggle) return;
+
+    nav.classList.remove("open");
+
+    menuToggle.classList.remove("active");
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    body.classList.remove("menu-open");
+
+  };
+
+
+  const openMobileMenu = () => {
+
+    if (!nav || !menuToggle) return;
+
+    nav.classList.add("open");
+
+    menuToggle.classList.add("active");
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    body.classList.add("menu-open");
+
+  };
+
 
   if (menuToggle && nav) {
 
-    menuToggle.addEventListener("click", () => {
+    menuToggle.addEventListener("click", event => {
 
-      const isOpen = nav.classList.toggle("open");
+      event.stopPropagation();
 
-      document.body.classList.toggle("menu-open", isOpen);
+      const isOpen =
+        nav.classList.contains("open");
 
-      menuToggle.setAttribute("aria-expanded", isOpen);
+      if (isOpen) {
 
-      menuToggle.classList.toggle("active", isOpen);
+        closeMobileMenu();
+
+      } else {
+
+        openMobileMenu();
+
+      }
 
     });
 
-    /* Close menu when a navigation link is clicked */
 
     navLinks.forEach(link => {
 
       link.addEventListener("click", () => {
 
-        nav.classList.remove("open");
-
-        document.body.classList.remove("menu-open");
-
-        menuToggle.classList.remove("active");
-
-        menuToggle.setAttribute("aria-expanded", "false");
+        closeMobileMenu();
 
       });
 
     });
 
-    /* Close menu when clicking outside */
 
     document.addEventListener("click", event => {
 
+      if (!nav.classList.contains("open")) {
+        return;
+      }
+
       if (
-        nav.classList.contains("open") &&
         !nav.contains(event.target) &&
         !menuToggle.contains(event.target)
       ) {
 
-        nav.classList.remove("open");
+        closeMobileMenu();
 
-        document.body.classList.remove("menu-open");
+      }
 
-        menuToggle.classList.remove("active");
+    });
 
-        menuToggle.setAttribute("aria-expanded", "false");
+
+    document.addEventListener("keydown", event => {
+
+      if (event.key === "Escape") {
+
+        closeMobileMenu();
+
+        menuToggle.focus();
 
       }
 
@@ -72,159 +140,275 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     2. ACTIVE NAVIGATION LINK
+     3. ACTIVE NAVIGATION LINK
      ======================================================= */
-
-  const sections = document.querySelectorAll("section[id]");
 
   const updateActiveNav = () => {
 
-    const scrollPosition = window.scrollY + 140;
+    if (!sections.length || !navLinks.length) {
+      return;
+    }
+
+    const scrollPosition =
+      window.scrollY + 180;
+
+    let currentSection = "";
 
     sections.forEach(section => {
 
-      const sectionTop = section.offsetTop;
+      const sectionTop =
+        section.offsetTop;
 
-      const sectionHeight = section.offsetHeight;
-
-      const sectionId = section.getAttribute("id");
-
-      const link = document.querySelector(
-        `nav a[href="#${sectionId}"]`
-      );
-
-      if (!link) return;
+      const sectionHeight =
+        section.offsetHeight;
 
       if (
         scrollPosition >= sectionTop &&
-        scrollPosition < sectionTop + sectionHeight
+        scrollPosition <
+          sectionTop + sectionHeight
       ) {
 
-        navLinks.forEach(navLink => {
-          navLink.classList.remove("active");
-        });
-
-        link.classList.add("active");
+        currentSection =
+          section.getAttribute("id");
 
       }
+
+    });
+
+
+    navLinks.forEach(link => {
+
+      const href =
+        link.getAttribute("href");
+
+      const isActive =
+        href === `#${currentSection}`;
+
+      link.classList.toggle(
+        "active",
+        isActive
+      );
 
     });
 
   };
 
-  window.addEventListener("scroll", updateActiveNav);
+
+  window.addEventListener(
+    "scroll",
+    updateActiveNav,
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "resize",
+    updateActiveNav
+  );
 
   updateActiveNav();
 
 
   /* =======================================================
-     3. BACK TO TOP BUTTON
+     4. HEADER SCROLL EFFECT
      ======================================================= */
 
-  const backToTop = document.querySelector("#back-to-top");
+  const updateHeader = () => {
+
+    if (!header) return;
+
+    header.classList.toggle(
+      "scrolled",
+      window.scrollY > 20
+    );
+
+  };
+
+
+  window.addEventListener(
+    "scroll",
+    updateHeader,
+    { passive: true }
+  );
+
+  updateHeader();
+
+
+  /* =======================================================
+     5. BACK TO TOP
+     ======================================================= */
 
   if (backToTop) {
 
-    const toggleBackToTop = () => {
+    const updateBackToTop = () => {
 
-      if (window.scrollY > 500) {
-
-        backToTop.classList.add("show");
-
-      } else {
-
-        backToTop.classList.remove("show");
-
-      }
+      backToTop.classList.toggle(
+        "show",
+        window.scrollY > 500
+      );
 
     };
 
-    window.addEventListener("scroll", toggleBackToTop);
 
-    toggleBackToTop();
+    window.addEventListener(
+      "scroll",
+      updateBackToTop,
+      { passive: true }
+    );
 
-    backToTop.addEventListener("click", () => {
+    updateBackToTop();
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
 
-    });
+    backToTop.addEventListener(
+      "click",
+      () => {
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
 
   }
 
 
   /* =======================================================
-     4. FAQ ACCORDION
+     6. FAQ ACCORDION
      ======================================================= */
 
-  const faqQuestions = document.querySelectorAll(".faq-question");
+  const faqQuestions =
+    document.querySelectorAll(
+      ".faq-question"
+    );
+
+
+  const closeFaq = question => {
+
+    const answer =
+      question.nextElementSibling;
+
+    question.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    if (answer) {
+
+      answer.style.maxHeight = null;
+
+    }
+
+  };
+
+
+  const openFaq = question => {
+
+    const answer =
+      question.nextElementSibling;
+
+    question.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    if (answer) {
+
+      answer.style.maxHeight =
+        `${answer.scrollHeight}px`;
+
+    }
+
+  };
+
 
   faqQuestions.forEach(question => {
 
-    question.addEventListener("click", () => {
+    question.addEventListener(
+      "click",
+      () => {
 
-      const answer = question.nextElementSibling;
+        const isExpanded =
+          question.getAttribute(
+            "aria-expanded"
+          ) === "true";
 
-      const isExpanded =
-        question.getAttribute("aria-expanded") === "true";
 
-      /* Close all other FAQ items */
+        faqQuestions.forEach(
+          otherQuestion => {
 
-      faqQuestions.forEach(otherQuestion => {
+            if (
+              otherQuestion !== question
+            ) {
 
-        if (otherQuestion !== question) {
+              closeFaq(otherQuestion);
 
-          otherQuestion.setAttribute(
-            "aria-expanded",
-            "false"
-          );
-
-          const otherAnswer =
-            otherQuestion.nextElementSibling;
-
-          if (otherAnswer) {
-
-            otherAnswer.style.maxHeight = null;
+            }
 
           }
+        );
+
+
+        if (isExpanded) {
+
+          closeFaq(question);
+
+        } else {
+
+          openFaq(question);
+
+        }
+
+      }
+    );
+
+  });
+
+
+  /* Recalculate open FAQ height on resize */
+
+  window.addEventListener(
+    "resize",
+    () => {
+
+      faqQuestions.forEach(question => {
+
+        const isExpanded =
+          question.getAttribute(
+            "aria-expanded"
+          ) === "true";
+
+        const answer =
+          question.nextElementSibling;
+
+        if (
+          isExpanded &&
+          answer
+        ) {
+
+          answer.style.maxHeight =
+            `${answer.scrollHeight}px`;
 
         }
 
       });
 
-      /* Toggle current FAQ */
-
-      question.setAttribute(
-        "aria-expanded",
-        String(!isExpanded)
-      );
-
-      if (!isExpanded) {
-
-        answer.style.maxHeight =
-          answer.scrollHeight + "px";
-
-      } else {
-
-        answer.style.maxHeight = null;
-
-      }
-
-    });
-
-  });
+    }
+  );
 
 
   /* =======================================================
-     5. SCROLL REVEAL ANIMATION
+     7. SCROLL REVEAL
      ======================================================= */
 
   const revealElements =
     document.querySelectorAll(".reveal");
 
-  if ("IntersectionObserver" in window) {
+
+  if (
+    "IntersectionObserver" in window &&
+    revealElements.length
+  ) {
 
     const revealObserver =
       new IntersectionObserver(
@@ -232,21 +416,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
           entries.forEach(entry => {
 
-            if (entry.isIntersecting) {
-
-              entry.target.classList.add("visible");
-
-              observer.unobserve(entry.target);
-
+            if (!entry.isIntersecting) {
+              return;
             }
+
+            entry.target.classList.add(
+              "visible"
+            );
+
+            observer.unobserve(
+              entry.target
+            );
 
           });
 
         },
         {
-          threshold: 0.12
+          threshold: 0.12,
+          rootMargin: "0px 0px -40px 0px"
         }
       );
+
 
     revealElements.forEach(element => {
 
@@ -266,263 +456,518 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     6. MEMBERSHIP FORM
-     ======================================================= */
-
-  const membershipForm =
-    document.querySelector("#membership-form");
-
-  const membershipStatus =
-    document.querySelector("#membership-status");
-
-  if (membershipForm) {
-
-    membershipForm.addEventListener("submit", event => {
-
-      event.preventDefault();
-
-      const formData =
-        new FormData(membershipForm);
-
-      const name =
-        formData.get("name");
-
-      const email =
-        formData.get("email");
-
-      const phone =
-        formData.get("phone");
-
-      const country =
-        formData.get("country");
-
-      const interest =
-        formData.get("interest");
-
-      if (!name || !email || !phone) {
-
-        if (membershipStatus) {
-
-          membershipStatus.textContent =
-            "Please complete all required fields.";
-
-          membershipStatus.className =
-            "form-status error";
-
-        }
-
-        return;
-
-      }
-
-      /*
-       * Nexora currently has no backend/database.
-       *
-       * For now we prepare the membership information
-       * and open WhatsApp so the application can be
-       * completed manually.
-       */
-
-      const message =
-        `NEXORA GLOBAL ACADEMY MEMBERSHIP APPLICATION\n\n` +
-        `Name: ${name}\n` +
-        `Email: ${email}\n` +
-        `Phone: ${phone}\n` +
-        `Country: ${country || "Not provided"}\n` +
-        `Area of Interest: ${interest || "Not provided"}\n\n` +
-        `I would like to become a member of Nexora Global Academy.`;
-
-      const whatsappNumber =
-        "2348167193341";
-
-      const whatsappURL =
-        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
-      if (membershipStatus) {
-
-        membershipStatus.textContent =
-          "Application prepared. Redirecting you to WhatsApp...";
-
-        membershipStatus.className =
-          "form-status success";
-
-      }
-
-      setTimeout(() => {
-
-        window.open(
-          whatsappURL,
-          "_blank",
-          "noopener,noreferrer"
-        );
-
-      }, 700);
-
-    });
-
-  }
-
-
-  /* =======================================================
-     7. CONTACT FORM
-     ======================================================= */
-
-  const contactForm =
-    document.querySelector("#contact-form");
-
-  const contactStatus =
-    document.querySelector("#contact-status");
-
-  if (contactForm) {
-
-    contactForm.addEventListener("submit", event => {
-
-      event.preventDefault();
-
-      const formData =
-        new FormData(contactForm);
-
-      const name =
-        formData.get("name");
-
-      const email =
-        formData.get("email");
-
-      const subject =
-        formData.get("subject");
-
-      const message =
-        formData.get("message");
-
-      if (!name || !email || !message) {
-
-        if (contactStatus) {
-
-          contactStatus.textContent =
-            "Please complete the required fields.";
-
-          contactStatus.className =
-            "form-status error";
-
-        }
-
-        return;
-
-      }
-
-      /*
-       * Since Nexora does not yet have a backend,
-       * we use the user's email application.
-       */
-
-      const emailAddress =
-        "nexoraglobalacademy@gmail.com";
-
-      const emailSubject =
-        subject
-          ? `Nexora Website: ${subject}`
-          : "Nexora Global Academy Website Enquiry";
-
-      const emailBody =
-        `Name: ${name}\n` +
-        `Email: ${email}\n\n` +
-        `${message}`;
-
-      const mailtoURL =
-        `mailto:${emailAddress}` +
-        `?subject=${encodeURIComponent(emailSubject)}` +
-        `&body=${encodeURIComponent(emailBody)}`;
-
-      if (contactStatus) {
-
-        contactStatus.textContent =
-          "Opening your email application...";
-
-        contactStatus.className =
-          "form-status success";
-
-      }
-
-      window.location.href = mailtoURL;
-
-    });
-
-  }
-
-
-  /* =======================================================
-     8. WHATSAPP LINKS
-     ======================================================= */
-
-  const whatsappLinks =
-    document.querySelectorAll("[data-whatsapp]");
-
-  whatsappLinks.forEach(link => {
-
-    link.addEventListener("click", () => {
-
-      const message =
-        link.getAttribute("data-whatsapp") ||
-        "Hello Nexora Global Academy. I would like to make an enquiry.";
-
-      const number =
-        "2348167193341";
-
-      const url =
-        `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-
-      link.href = url;
-
-    });
-
-  });
-
-
-  /* =======================================================
-     9. SMOOTH SCROLL
+     8. SMOOTH SCROLL
      ======================================================= */
 
   const anchorLinks =
-    document.querySelectorAll('a[href^="#"]');
+    document.querySelectorAll(
+      'a[href^="#"]'
+    );
+
 
   anchorLinks.forEach(link => {
 
-    link.addEventListener("click", event => {
+    link.addEventListener(
+      "click",
+      event => {
 
-      const targetId =
-        link.getAttribute("href");
+        const targetId =
+          link.getAttribute("href");
 
-      if (
-        !targetId ||
-        targetId === "#" ||
-        targetId.length < 2
-      ) {
-        return;
+
+        if (
+          !targetId ||
+          targetId === "#"
+        ) {
+
+          return;
+
+        }
+
+
+        let target = null;
+
+        try {
+
+          target =
+            document.querySelector(
+              targetId
+            );
+
+        } catch (error) {
+
+          return;
+
+        }
+
+
+        if (!target) {
+          return;
+        }
+
+
+        event.preventDefault();
+
+
+        const headerHeight =
+          header
+            ? header.offsetHeight
+            : 0;
+
+
+        const targetPosition =
+          target.getBoundingClientRect().top +
+          window.scrollY -
+          headerHeight;
+
+
+        window.scrollTo({
+
+          top:
+            Math.max(
+              targetPosition,
+              0
+            ),
+
+          behavior: "smooth"
+
+        });
+
+
+        /* Update URL without jumping */
+
+        if (
+          window.history &&
+          window.history.pushState
+        ) {
+
+          window.history.pushState(
+            null,
+            "",
+            targetId
+          );
+
+        }
+
       }
-
-      const target =
-        document.querySelector(targetId);
-
-      if (!target) return;
-
-      event.preventDefault();
-
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
-    });
+    );
 
   });
 
 
   /* =======================================================
-     10. CURRENT YEAR
+     9. MEMBERSHIP FORM
+     ======================================================= */
+
+  const membershipForm =
+    document.querySelector(
+      "#membership-form"
+    );
+
+  const membershipStatus =
+    document.querySelector(
+      "#membership-status"
+    );
+
+
+  const setFormStatus = (
+    element,
+    message,
+    type
+  ) => {
+
+    if (!element) return;
+
+    element.textContent =
+      message;
+
+    element.className =
+      `form-status ${type}`;
+
+  };
+
+
+  const setButtonLoading = (
+    button,
+    loading,
+    originalText
+  ) => {
+
+    if (!button) return;
+
+    if (loading) {
+
+      button.disabled = true;
+
+      button.dataset.originalText =
+        originalText ||
+        button.textContent.trim();
+
+      button.innerHTML =
+        `Processing... <i class="fa-solid fa-spinner fa-spin"></i>`;
+
+    } else {
+
+      button.disabled = false;
+
+      button.innerHTML =
+        button.dataset.originalText ||
+        originalText ||
+        "Submit";
+
+    }
+
+  };
+
+
+  if (membershipForm) {
+
+    membershipForm.addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+
+        if (
+          !membershipForm.checkValidity()
+        ) {
+
+          membershipForm.reportValidity();
+
+          setFormStatus(
+            membershipStatus,
+            "Please complete all required fields.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const formData =
+          new FormData(
+            membershipForm
+          );
+
+
+        const name =
+          String(
+            formData.get("name") || ""
+          ).trim();
+
+        const email =
+          String(
+            formData.get("email") || ""
+          ).trim();
+
+        const phone =
+          String(
+            formData.get("phone") || ""
+          ).trim();
+
+        const country =
+          String(
+            formData.get("country") || ""
+          ).trim();
+
+        const interest =
+          String(
+            formData.get("interest") || ""
+          ).trim();
+
+        const message =
+          String(
+            formData.get("message") || ""
+          ).trim();
+
+
+        if (
+          !name ||
+          !email ||
+          !phone ||
+          !country ||
+          !interest ||
+          !message
+        ) {
+
+          setFormStatus(
+            membershipStatus,
+            "Please complete all required fields.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const submitButton =
+          membershipForm.querySelector(
+            'button[type="submit"]'
+          );
+
+
+        const whatsappMessage =
+          `NEXORA GLOBAL ACADEMY MEMBERSHIP APPLICATION\n\n` +
+          `Full Name: ${name}\n` +
+          `Email: ${email}\n` +
+          `WhatsApp Number: ${phone}\n` +
+          `Country: ${country}\n` +
+          `Area of Interest: ${interest}\n` +
+          `Why I want to join: ${message}`;
+
+
+        const whatsappNumber =
+          "2348167193341";
+
+
+        const whatsappURL =
+          `https://wa.me/${whatsappNumber}?text=` +
+          encodeURIComponent(
+            whatsappMessage
+          );
+
+
+        setFormStatus(
+          membershipStatus,
+          "Your application is ready. Opening WhatsApp...",
+          "success"
+        );
+
+
+        setButtonLoading(
+          submitButton,
+          true,
+          "Submit Interest"
+        );
+
+
+        setTimeout(() => {
+
+          window.open(
+            whatsappURL,
+            "_blank",
+            "noopener,noreferrer"
+          );
+
+
+          setButtonLoading(
+            submitButton,
+            false,
+            "Submit Interest"
+          );
+
+        }, 600);
+
+      }
+    );
+
+  }
+
+
+  /* =======================================================
+     10. CONTACT FORM
+     ======================================================= */
+
+  const contactForm =
+    document.querySelector(
+      "#contact-form"
+    );
+
+  const contactStatus =
+    document.querySelector(
+      "#contact-status"
+    );
+
+
+  if (contactForm) {
+
+    contactForm.addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+
+        if (
+          !contactForm.checkValidity()
+        ) {
+
+          contactForm.reportValidity();
+
+          setFormStatus(
+            contactStatus,
+            "Please complete all required fields.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const formData =
+          new FormData(
+            contactForm
+          );
+
+
+        const name =
+          String(
+            formData.get("name") || ""
+          ).trim();
+
+        const email =
+          String(
+            formData.get("email") || ""
+          ).trim();
+
+        const subject =
+          String(
+            formData.get("subject") || ""
+          ).trim();
+
+        const message =
+          String(
+            formData.get("message") || ""
+          ).trim();
+
+
+        if (
+          !name ||
+          !email ||
+          !subject ||
+          !message
+        ) {
+
+          setFormStatus(
+            contactStatus,
+            "Please complete all required fields.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const emailAddress =
+          "nexoraglobalacademy@gmail.com";
+
+
+        const emailSubject =
+          `Nexora Website: ${subject}`;
+
+
+        const emailBody =
+          `Name: ${name}\n` +
+          `Email: ${email}\n\n` +
+          `Message:\n${message}`;
+
+
+        const mailtoURL =
+          `mailto:${emailAddress}` +
+          `?subject=${encodeURIComponent(
+            emailSubject
+          )}` +
+          `&body=${encodeURIComponent(
+            emailBody
+          )}`;
+
+
+        setFormStatus(
+          contactStatus,
+          "Opening your email application...",
+          "success"
+        );
+
+
+        const submitButton =
+          contactForm.querySelector(
+            'button[type="submit"]'
+          );
+
+
+        setButtonLoading(
+          submitButton,
+          true,
+          "Send Message"
+        );
+
+
+        setTimeout(() => {
+
+          window.location.href =
+            mailtoURL;
+
+          setButtonLoading(
+            submitButton,
+            false,
+            "Send Message"
+          );
+
+        }, 400);
+
+      }
+    );
+
+  }
+
+
+  /* =======================================================
+     11. WHATSAPP DATA LINKS
+     ======================================================= */
+
+  const whatsappLinks =
+    document.querySelectorAll(
+      "[data-whatsapp]"
+    );
+
+
+  whatsappLinks.forEach(link => {
+
+    link.addEventListener(
+      "click",
+      () => {
+
+        const message =
+          link.getAttribute(
+            "data-whatsapp"
+          );
+
+
+        if (!message) {
+          return;
+        }
+
+
+        const number =
+          "2348167193341";
+
+
+        link.href =
+          `https://wa.me/${number}?text=` +
+          encodeURIComponent(
+            message
+          );
+
+      }
+    );
+
+  });
+
+
+  /* =======================================================
+     12. CURRENT YEAR
      ======================================================= */
 
   const yearElements =
-    document.querySelectorAll("[data-current-year]");
+    document.querySelectorAll(
+      "[data-current-year]"
+    );
+
 
   yearElements.forEach(element => {
 
@@ -533,122 +978,86 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     11. HEADER SHADOW ON SCROLL
-     ======================================================= */
-
-  const header =
-    document.querySelector("#header");
-
-  if (header) {
-
-    const updateHeader =
-      () => {
-
-        if (window.scrollY > 20) {
-
-          header.classList.add("scrolled");
-
-        } else {
-
-          header.classList.remove("scrolled");
-
-        }
-
-      };
-
-    window.addEventListener(
-      "scroll",
-      updateHeader
-    );
-
-    updateHeader();
-
-  }
-
-
-  /* =======================================================
-     12. PREVENT MULTIPLE FORM SUBMISSIONS
-     ======================================================= */
-
-  const forms =
-    document.querySelectorAll("form");
-
-  forms.forEach(form => {
-
-    form.addEventListener("submit", () => {
-
-      const submitButton =
-        form.querySelector(
-          'button[type="submit"], input[type="submit"]'
-        );
-
-      if (!submitButton) return;
-
-      setTimeout(() => {
-
-        submitButton.blur();
-
-      }, 300);
-
-    });
-
-  });
-
-
-  /* =======================================================
-     13. ESCAPE KEY
-     Close mobile menu
-     ======================================================= */
-
-  document.addEventListener("keydown", event => {
-
-    if (event.key !== "Escape") return;
-
-    if (
-      nav &&
-      nav.classList.contains("open")
-    ) {
-
-      nav.classList.remove("open");
-
-      document.body.classList.remove("menu-open");
-
-      if (menuToggle) {
-
-        menuToggle.classList.remove("active");
-
-        menuToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-      }
-
-    }
-
-  });
-
-
-  /* =======================================================
-     14. IMAGE ERROR HANDLING
+     13. IMAGE ERROR HANDLING
      ======================================================= */
 
   const images =
     document.querySelectorAll("img");
 
+
   images.forEach(image => {
 
-    image.addEventListener("error", () => {
+    image.addEventListener(
+      "error",
+      () => {
 
-      image.classList.add("image-error");
+        image.classList.add(
+          "image-error"
+        );
 
-    });
+        image.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+      }
+    );
+
+
+    image.addEventListener(
+      "load",
+      () => {
+
+        image.classList.remove(
+          "image-error"
+        );
+
+      }
+    );
 
   });
 
 
   /* =======================================================
-     15. CONSOLE MESSAGE
+     14. REDUCE MOTION SUPPORT
+     ======================================================= */
+
+  const prefersReducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+
+  if (prefersReducedMotion.matches) {
+
+    document.documentElement.style
+      .scrollBehavior = "auto";
+
+  }
+
+
+  /* =======================================================
+     15. CLOSE MENU ON RESIZE
+     ======================================================= */
+
+  window.addEventListener(
+    "resize",
+    () => {
+
+      if (
+        window.innerWidth > 900
+      ) {
+
+        closeMobileMenu();
+
+      }
+
+    }
+  );
+
+
+  /* =======================================================
+     16. CONSOLE MESSAGE
      ======================================================= */
 
   console.log(
